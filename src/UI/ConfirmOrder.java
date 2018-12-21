@@ -477,7 +477,66 @@ public class ConfirmOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_lblChooseFromListMouseExited
 
     private void lblChooseFromListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChooseFromListMouseClicked
-       JOptionPane.showMessageDialog(null, "Function Not Available yet.","WARNING",JOptionPane.ERROR_MESSAGE);
+       //open a table of coop customer for select
+    JFrame jframe = new JFrame();
+    GridLayout layout = new GridLayout(1,1);
+    jframe.setLayout(layout);
+   //JButton jbt = new JButton("close");
+  //  jbt.setSize(50, 25);
+    //row data dummy
+   
+    JTable jtb = new JTable();
+    //put cooerate customer into the table
+      DefaultTableModel model = (DefaultTableModel) jtb.getModel();
+      //intialize column
+      model.addColumn("Customer ID");
+      model.addColumn("Cooperate Customer");
+      model.addColumn("Credit Left");
+        int rowCount = model.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {model.removeRow(i);}//make it is empty
+         for(int i=0;i<allConsumerList.getNumberOfEntries();i++){
+             ConsumerE c = allConsumerList.getEntry(i+1);
+              model.addRow(new Object[]{c.getCustID(),c.getCustName(),c.getGender()});
+       }
+    jtb.setBounds(30, 40, 200, 300);
+    //add table onclick listener
+    jtb.addMouseListener(new java.awt.event.MouseAdapter(){
+        public void mouseClicked(java.awt.event.MouseEvent e){
+            for(int i=0;i<allConsumerList.getNumberOfEntries();i++){
+                if(allConsumerList.getEntry(i+1).getCustID().equals(jtb.getModel().getValueAt(jtb.getSelectedRow(),0))){
+                    tfCustName.setText(allConsumerList.getEntry(i+1).getCustName());
+                    tfCustPhone.setText(allConsumerList.getEntry(i+1).getCustPhone());
+                    taAddress.setText(allConsumerList.getEntry(i+1).getCustAddress());
+                    tfCustName.setEditable(false);
+                    tfCustPhone.setEditable(false);
+                    taAddress.setEditable(false);
+                    monthlyCredit =coopCustList.getEntry(i+1).getCustLimit();
+                    //lblCredit.setText("Credit left: "+monthlyCredit);
+                    lblCredit.setVisible(false);
+                    consumer=allConsumerList.getEntry(i+1);
+                }
+            }
+            jframe.setVisible(false);
+        }
+    });
+    
+    
+    
+    JScrollPane jsp = new JScrollPane(jtb);
+    jsp.setSize(400,300);
+    jsp.setBackground(Color.white);
+
+    // button action listener for close this frame
+   /* jbt.addActionListener(new ActionListener()
+{public void actionPerformed(ActionEvent e)
+  {jframe.setVisible(false);}});*/
+    
+    //initialize the frame componenet
+    jframe.setTitle("Choose a customer.");
+    jframe.setSize(300, 300);
+    jframe.add(jsp);
+    jframe.setLocation(750, 500);
+    jframe.setVisible(true);
     
     }//GEN-LAST:event_lblChooseFromListMouseClicked
 
@@ -541,10 +600,13 @@ return validate;
            
            if(selection==0){
                if(watever.getSelection().getActionCommand().toLowerCase().equals("individual")){
-                   consumer.setCustID("CO"+consumer.getNumber());
+                   if(consumer==null){
+                       consumer.setCustID("CO"+consumer.getNum());
                    consumer.setCustName(tfCustName.getText());
                    consumer.setCustPhone(tfCustPhone.getText());
                    consumer.setCustAddress(taAddress.getText());
+                   }
+                  
                   
                    order1.setConsumer(consumer);
                    order1.setOrderType(DorP.getSelection().getActionCommand());

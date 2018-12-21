@@ -35,11 +35,10 @@ public class DisplayCatalog extends javax.swing.JFrame {
  ListInterface<CatalogProduct> prodList = new LList();
  ListInterface<OrderList> orderList = new LList();
  ListInterface<Order> salesOrderList = new LList<>();
- ListInterface<ConsumerOrder> consumerOrderList = new LList<>();
+
  ListInterface<OrderList> selectOrderList = new LList<>();
  double totalAmt=0.00;
- Order consumerOrder = new ConsumerOrder();
- Order cooperateOrder = new CooperateOrder();
+
  Order order = new Order();
  String orderID="";
     /**
