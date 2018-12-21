@@ -17,7 +17,7 @@ public class Promotion {
     private String EndDate;
     private String promotionTitle;
     private int discountRate;
-    private CatalogProduct CP;
+    
 
     public Promotion() {
     }
@@ -29,17 +29,6 @@ public class Promotion {
         this.promotionTitle = promotionTitle;
         this.discountRate = discountRate;
     }
-
-    public Promotion(String promotionID, String StartDate, String EndDate, String promotionTitle, int discountRate, CatalogProduct CP) {
-        this.promotionID = promotionID;
-        this.StartDate = StartDate;
-        this.EndDate = EndDate;
-        this.promotionTitle = promotionTitle;
-        this.discountRate = discountRate;
-        this.CP = CP;
-    }
-    
-    
 
     public String getPromotionID() {
         return promotionID;
@@ -81,13 +70,6 @@ public class Promotion {
         this.discountRate = discountRate;
     }
 
-    public CatalogProduct getCP() {
-        return CP;
-    }
-
-    public void setCP(CatalogProduct CP) {
-        this.CP = CP;
-    }
 
     @Override
     public String toString(){

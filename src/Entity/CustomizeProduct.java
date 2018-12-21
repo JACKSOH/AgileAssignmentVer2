@@ -9,56 +9,33 @@ import java.util.List;
  *
  * @author boonk
  */
-public class CustomizeProduct {
-    private String custProdID;
+public class CustomizeProduct extends Product{
+    
     private String style;
     private String size;
     private String priority;
-    private Order order;
+    
     
     public CustomizeProduct() {
+        super();
     }
 
-    public CustomizeProduct(String custProdID) {
-        this.custProdID = custProdID;
-    }
-
-    public CustomizeProduct(String custProdID, String style, String size, String priority,Order order) {
-        this.custProdID = custProdID;
+    public CustomizeProduct(String style, String size, String priority) {
         this.style = style;
         this.size = size;
         this.priority = priority;
-        this.order=order;
     }
 
-    @Override
-    public String toString() {
-        return "CustomizeProduct{" + "custProdID=" + custProdID + ", style=" + style + ", size=" + size + ", priority=" + priority + ", order=" + order + '}';
+    public CustomizeProduct(String style, String size, String priority, String prodID, double prodPrice) {
+        super(prodID, prodPrice);
+        this.style = style;
+        this.size = size;
+        this.priority = priority;
     }
 
    
-   
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    
-   
-
-    public String getCustProdID() {
-        return custProdID;
-    }
-
-    public void setCustProdID(String custProdID) {
-        this.custProdID = custProdID;
-    }
-
-    
+  
     public String getStyle() {
         return style;
     }
@@ -81,6 +58,11 @@ public class CustomizeProduct {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomizeProduct{" + "style=" + style + ", size=" + size + ", priority=" + priority + '}';
     }
     
 }

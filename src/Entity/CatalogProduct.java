@@ -9,69 +9,38 @@ package Entity;
  *
  * @author boonk
  */
-public class CatalogProduct {
+public class CatalogProduct extends Product{
     
    
-    private String prodID;
+    
     private String prodName;
     private String prodType;
     private String prodStatus;
     private String prodDescription;
-    private double prodPrice;
+    
     private int prodQuantity;
 
     public CatalogProduct(){
-        
-    }
-    public CatalogProduct(String prodID, String prodName, String prodType, double prodPrice, int prodQuantity) {
-        this.prodID = prodID;
-        this.prodName = prodName;
-        this.prodType = prodType;
-        this.prodPrice = prodPrice;
-        this.prodQuantity = prodQuantity;
+        super();
     }
 
-    
-    public CatalogProduct(String prodID,String prodName, String prodType, String prodDescription, double prodPrice, int prodQuantity) {
-        this.prodID = prodID;
-        this.prodName = prodName;
-        this.prodType = prodType;
-        this.prodDescription = prodDescription;
-        this.prodPrice = prodPrice;
-        this.prodQuantity = prodQuantity;
-    }
-
-    public CatalogProduct(String prodID, String prodName, String prodType, String prodStatus, String prodDescription, double prodPrice) {
-        this.prodID = prodID;
+    public CatalogProduct(String prodName, String prodType, String prodStatus, String prodDescription, int prodQuantity) {
         this.prodName = prodName;
         this.prodType = prodType;
         this.prodStatus = prodStatus;
         this.prodDescription = prodDescription;
-        this.prodPrice = prodPrice;
+        this.prodQuantity = prodQuantity;
     }
-    
-    
-    public CatalogProduct(String prodID, String prodName, String prodType, String prodStatus, String prodDescription, double prodPrice, int prodQuantity) {
-        this.prodID = prodID;
+
+    public CatalogProduct(String prodName, String prodType, String prodStatus, String prodDescription, int prodQuantity, String prodID, double prodPrice) {
+        super(prodID, prodPrice);
         this.prodName = prodName;
         this.prodType = prodType;
         this.prodStatus = prodStatus;
         this.prodDescription = prodDescription;
-        this.prodPrice = prodPrice;
         this.prodQuantity = prodQuantity;
     }
     
-
-    
-
-    public String getProdID() {
-        return prodID;
-    }
-
-    public void setProdID(String prodID) {
-        this.prodID = prodID;
-    }
-
     public String getProdName() {
         return prodName;
     }
@@ -104,13 +73,6 @@ public class CatalogProduct {
         this.prodDescription = prodDescription;
     }
 
-    public double getProdPrice() {
-        return prodPrice;
-    }
-
-    public void setProdPrice(double prodPrice) {
-        this.prodPrice = prodPrice;
-    }
 
     public int getProdQuantity() {
         return prodQuantity;
@@ -120,12 +82,16 @@ public class CatalogProduct {
         this.prodQuantity = prodQuantity;
     }
 
-    
-    
     @Override
     public String toString() {
-        return String.format(" ID: %s\n Flower name :%s \n Flower type :%s \n Quantity :%d \n Price :RM%.2f \n Description :%s \n",prodID ,prodName , prodType, prodQuantity, prodPrice, prodDescription);
+        return "CatalogProduct{" + "prodName=" + prodName + ", prodType=" + prodType + ", prodStatus=" + prodStatus + ", prodDescription=" + prodDescription + ", prodQuantity=" + prodQuantity + '}';
     }
+
+    
+
+    
+    
+    
    
 
     

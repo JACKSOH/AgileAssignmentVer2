@@ -12,12 +12,21 @@ package Entity;
 public class Pickup {
     
     private Order order;
-    private String orderID;
+    
     private String pickupID;
     private String pickupDate;
     private String pickupTime;
     private String pickupPriority;
     private String pickupStatus;
+
+    public Pickup(Order order, String pickupID, String pickupDate, String pickupTime, String pickupPriority, String pickupStatus) {
+        this.order = order;
+        this.pickupID = pickupID;
+        this.pickupDate = pickupDate;
+        this.pickupTime = pickupTime;
+        this.pickupPriority = pickupPriority;
+        this.pickupStatus = pickupStatus;
+    }
 
     public String getPickupStatus() {
         return pickupStatus;
@@ -28,44 +37,7 @@ public class Pickup {
     }
     public Pickup() {
     }
-    public Pickup(String orderID, String pickupID, String pickupDate,String pickupTime, String pickupPriority,String pickupStatus) {
-        this.orderID = orderID;
-        this.pickupID = pickupID;
-        this.pickupDate = pickupDate;
-        this.pickupTime = pickupTime;
-        this.pickupPriority = pickupPriority;
-        this.pickupStatus=pickupStatus;
-    }
-
-    public Pickup(Order order, String orderID, String pickupID, String pickupDate, String pickupTime, String pickupPriority, String pickupStatus) {
-        this.order = order;
-        this.orderID = orderID;
-        this.pickupID = pickupID;
-        this.pickupDate = pickupDate;
-        this.pickupTime = pickupTime;
-        this.pickupPriority = pickupPriority;
-        this.pickupStatus = pickupStatus;
-    }
-
-    @Override
-    public String toString() {
-        return "Pickup{" + "orderID=" + orderID + ", pickupID=" + pickupID + ", pickupPriority=" + pickupPriority + '}';
-    }
-
-    public Pickup(String orderID, String pickupID, String pickupPriority) {
-        this.orderID = orderID;
-        this.pickupID = pickupID;
-        this.pickupPriority = pickupPriority;
-    }
-
-    public Pickup(Order order, String pickupID, String pickupDate, String pickupTime, String pickupPriority, String pickupStatus) {
-        this.order = order;
-        this.pickupID = pickupID;
-        this.pickupDate = pickupDate;
-        this.pickupTime = pickupTime;
-        this.pickupPriority = pickupPriority;
-        this.pickupStatus = pickupStatus;
-    }
+  
 
     
 
@@ -77,13 +49,7 @@ public class Pickup {
         this.order = order;
     }
 
-    public String getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(String orderID) {
-        this.orderID = orderID;
-    }
+   
 
     public String getPickupID() {
         return pickupID;

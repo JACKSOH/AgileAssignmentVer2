@@ -11,19 +11,26 @@ package Entity;
  */
 public class Delivery {
     private Order order;
-    private String orderID; // ref
     private String deliveryID;
     private String deliveryManName;
     private String deliveryDate;
     private String deliveredTime;
-    private String roadName;
+    private String posCode;
     private String address;
 
-    public Delivery(String orderID) {
-        this.orderID = orderID;
+    public Delivery(Order order, String deliveryID, String deliveryManName, String deliveryDate, String deliveredTime, String posCode, String address) {
+        this.order = order;
+        this.deliveryID = deliveryID;
+        this.deliveryManName = deliveryManName;
+        this.deliveryDate = deliveryDate;
+        this.deliveredTime = deliveredTime;
+        this.posCode = posCode;
+        this.address = address;
     }
+
     
-    
+
+
     public String getDeliveredTime() {
         return deliveredTime;
     }
@@ -33,42 +40,6 @@ public class Delivery {
     }
 
     
-    public Delivery(String orderID, String deliveryID, String deliveryManName, String deliveryDate, String roadName, String address, String deliveredTime) {
-        this.orderID = orderID;
-        this.deliveryID = deliveryID;
-        this.deliveryManName = deliveryManName;
-        this.deliveryDate = deliveryDate;
-        this.roadName = roadName;
-        this.address = address;
-        this.deliveredTime = deliveredTime;
-    }
-
-    public Delivery(Order order, String deliveryID, String deliveryManName, String deliveryDate, String deliveredTime, String roadName, String address) {
-        this.order = order;
-        this.deliveryID = deliveryID;
-        this.deliveryManName = deliveryManName;
-        this.deliveryDate = deliveryDate;
-        this.deliveredTime = deliveredTime;
-        this.roadName = roadName;
-        this.address = address;
-    }
-
-    
-    
-    
-    
-
-    public Delivery(String orderID, String deliveryID, String deliveryManName, String deliveryDate, String address) {
-        this.orderID = orderID;
-        this.deliveryID = deliveryID;
-        this.deliveryManName = deliveryManName;
-        this.deliveryDate = deliveryDate;
-        this.address = address;
-    }
-
-    
-
-   
     public String getDeliveryDate() {
         return deliveryDate;
     }
@@ -77,17 +48,9 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
     }
 
-    @Override
-    public String toString() {
-        return "Delivery{" + "orderID=" + orderID + ", deliveryID=" + deliveryID + ", deliveryManName=" + deliveryManName + ", deliveryDate=" + deliveryDate + ", address=" + address + '}';
-    }
-
-    
 
     public Delivery() {
     }
-
-   
 
     public Order getOrder() {
         return order;
@@ -95,14 +58,6 @@ public class Delivery {
 
     public void setOrder(Order order) {
         this.order = order;
-    }
-
-    public String getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(String orderID) {
-        this.orderID = orderID;
     }
 
     public String getDeliveryID() {
@@ -121,13 +76,15 @@ public class Delivery {
         this.deliveryManName = deliveryManName;
     }
 
-    public String getRoadName() {
-        return roadName;
+    public String getPosCode() {
+        return posCode;
     }
 
-    public void setRoadName(String roadName) {
-        this.roadName = roadName;
+    public void setPosCode(String posCode) {
+        this.posCode = posCode;
     }
+
+   
 
     public String getAddress() {
         return address;
@@ -136,5 +93,12 @@ public class Delivery {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Delivery{" + "order=" + order + ", deliveryID=" + deliveryID + ", deliveryManName=" + deliveryManName + ", deliveryDate=" + deliveryDate + ", deliveredTime=" + deliveredTime + ", posCode=" + posCode + ", address=" + address + '}';
+    }
+
+    
     
 }
