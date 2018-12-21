@@ -6,14 +6,8 @@
 package UI;
 
 import ADT.*;
-import Entity.CatalogProduct;
-import Entity.ConsumerE;
-import Entity.CooperateE;
-import Entity.Delivery;
-import Entity.Invoice;
-import Entity.Order;
-import Entity.OrderList;
-import Entity.Pickup;
+import Entity.*;
+
 import static UI.SalesOrder.salesOrderList;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -41,8 +35,11 @@ public class DisplayCatalog extends javax.swing.JFrame {
  ListInterface<CatalogProduct> prodList = new LList();
  ListInterface<OrderList> orderList = new LList();
  ListInterface<Order> salesOrderList = new LList<>();
+ ListInterface<ConsumerOrder> consumerOrderList = new LList<>();
  ListInterface<OrderList> selectOrderList = new LList<>();
  double totalAmt=0.00;
+ Order consumerOrder = new ConsumerOrder();
+ Order cooperateOrder = new CooperateOrder();
  Order order = new Order();
  String orderID="";
     /**
@@ -729,59 +726,12 @@ public void initialize(){
                     imgDesc="Description: \n"+prodList.getEntry(i+1).getProdDescription();
                 }
             }
-            /* for(int i=0; i<prodList.getNumberOfEntries();i++){
-                if(s==prodList.getEntry(i+1).getProdName()){
-
-                }
-            }*/
-            //  FlowerStyleddl.setSelectedIndex(0);
-
-            /* if(s=="Just For You"){
-                imgFile="JustForYou.jpg";
-                imgDesc="";
-                price+= String.format("%.2f",120.00);
-            }else if(s=="True Romance"){
-                imgFile="TrueRomance.jpg";
-                imgDesc="";
-                price+= String.format("%.2f",120.00);
-            }else if(s=="Teddy Red"){
-                imgFile="TeddyRed.jpg";
-                imgDesc="";price+= String.format("%.2f",110.00);
-            }else if(s=="Queen"){
-                imgFile="Queen.jpg";
-                imgDesc="";price+= String.format("%.2f",120.00);
-            }else if(s=="Pink Delight"){
-                imgFile="PinkDelight.jpg";
-                imgDesc="";price+= String.format("%.2f",100.00);
-            }else if(s=="Lily Love"){
-                imgFile="Lily Love.jpg";
-                imgDesc="";price+= String.format("%.2f",100.00);
-            }else if(s=="Princess"){
-                imgFile="Princess.jpg";
-                imgDesc="";price+= String.format("%.2f",100.00);
-            }else if(s=="Over the Rainbow"){
-                imgFile="OverTheRainbow.jpg";imgDesc="";price+= String.format("%.2f",100.00);
-            }else if(s=="Sweet Admiration"){
-                imgFile="SweetAdmiration.jpg";
-                imgDesc="";price+= String.format("%.2f",100.00);
-            }else if(s=="Montrex Tulips"){
-                imgFile="MontrexTulips.jpg";
-                imgDesc="";price+= String.format("%.2f",100.00);
-            }else if(s=="Purple Tulips"){
-                imgFile="PurpleTulips.jpg";
-                imgDesc="";price+= String.format("%.2f",100.00);
-            }
-            ImageIcon imgIcon;
-
-            imgIcon = new ImageIcon(getClass().getResource("../ui/images/"+imgFile));
-            Image image = imgIcon.getImage();
-            Image resize = image.getScaledInstance( 200, 150, java.awt.Image.SCALE_SMOOTH);
-            imgIcon = new ImageIcon(resize);*/
+          
             jLabel3.setText(price);
             jLabel3.setVisible(true);
             lblDesc.setText(imgDesc);
             lblDesc.setVisible(true);
-            // FlowerImage.setIcon(imgIcon);
+          
         }
         if(FlowerStyleddl.getSelectedIndex()!=0){
             lblQuanity.setVisible(true);
@@ -810,44 +760,7 @@ public void initialize(){
         }
         flowerStyleLabel.setVisible(true);
         FlowerStyleddl.setVisible(true);
-        /*  if(flower =="Roses"){
-
-            FlowerStyleddl.removeAllItems();
-            FlowerStyleddl.addItem("Just For You");
-            FlowerStyleddl.addItem("True Romance");
-            FlowerStyleddl.addItem("Teddy Red");
-            FlowerStyleddl.addItem("Queen");
-            flowerStyleLabel.setVisible(true);
-            FlowerStyleddl.setVisible(true);
-            //FlowerStyleddl.setSelectedIndex(0);
-        }else if(flower == "Lilies"){
-
-            FlowerStyleddl.removeAllItems();
-            FlowerStyleddl.addItem("Pink Delight");
-            FlowerStyleddl.addItem("Lily Love");
-            FlowerStyleddl.addItem("Princess");
-            flowerStyleLabel.setVisible(true);
-            FlowerStyleddl.setVisible(true);
-            //FlowerStyleddl.setSelectedIndex(0);
-        }else if(flower == "Tulips"){
-
-            FlowerStyleddl.removeAllItems();
-            FlowerStyleddl.addItem("Montrex Tulips");
-            FlowerStyleddl.addItem("Purple Tulips in a Vase");
-            flowerStyleLabel.setVisible(true);
-            FlowerStyleddl.setVisible(true);
-            //FlowerStyleddl.setSelectedIndex(0);
-        }
-        else if(flower =="Others"){
-
-            FlowerStyleddl.removeAllItems();
-            FlowerStyleddl.addItem("Over the Rainbow");
-            FlowerStyleddl.addItem("Sweet Admiration");
-
-            flowerStyleLabel.setVisible(true);
-            FlowerStyleddl.setVisible(true);
-            //FlowerStyleddl.setSelectedIndex(0);
-        }*/
+      
     }//GEN-LAST:event_FlowerddlActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -886,7 +799,6 @@ public void initialize(){
                 JOptionPane.showMessageDialog(null,"Item is successfully addedd to cart","Confirmation message", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
