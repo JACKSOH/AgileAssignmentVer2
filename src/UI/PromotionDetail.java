@@ -59,10 +59,10 @@ public class PromotionDetail extends javax.swing.JFrame {
     }
    
     public void initialize(){
-        CatalogProduct cp = new CatalogProduct("Lily","Bouquet","Available","Funny",120,"FL001",120.00);
-        CatalogProduct cp1 = new CatalogProduct("Rose","Floral arrangement","Remaining Stock Rarely","Funny",30,"FL002",120.00);
-        CatalogProduct cp2 = new CatalogProduct("Carnation","Bouquet","Out-of-Stock","Funny",1,"FL003",120.00);
-        CatalogProduct cp3 = new CatalogProduct("Tuplis","Fresh Flower","Available","Funny",120,"FL004",120.00); 
+        CatalogProduct cp = new CatalogProduct("Lily","Bouquet","Available","Funny",120,"CP001",120.00);
+        CatalogProduct cp1 = new CatalogProduct("Rose","Floral arrangement","Remaining Stock Rarely","Funny",30,"CP002",120.00);
+        CatalogProduct cp2 = new CatalogProduct("Carnation","Bouquet","Out-of-Stock","Funny",1,"CP003",120.00);
+        CatalogProduct cp3 = new CatalogProduct("Tuplis","Fresh Flower","Available","Funny",120,"CP004",120.00); 
         productList.add(cp);
         productList.add(cp1);
         productList.add(cp2);

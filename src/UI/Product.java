@@ -635,6 +635,7 @@ public class Product extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     public void initialize(){
         //add dummy flower data
           productList=allCatProdList;
@@ -694,9 +695,6 @@ public class Product extends javax.swing.JFrame {
               productList.getEntry(a+1).getProdDescription(), 
             });
         }
-    }
-    
-    public void refreshTable(){
     }
     
     private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
@@ -803,8 +801,7 @@ public class Product extends javax.swing.JFrame {
                 productList.getEntry(i+1).setProdType(uType.getText());
                 productList.getEntry(i+1).setProdPrice(Double.parseDouble(uPrice.getText()));
                 productList.getEntry(i+1).setProdQuantity(Integer.parseInt(uQuantity.getText()));
-                productList.getEntry(i+1).setProdDescription(uDescription.getText());
-                
+                productList.getEntry(i+1).setProdDescription(uDescription.getText());    
             }
         }
         JOptionPane.showMessageDialog(null, "Updated successful","Information", JOptionPane.INFORMATION_MESSAGE);
