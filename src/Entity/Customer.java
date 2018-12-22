@@ -12,8 +12,7 @@ package Entity;
 public class Customer {
     
     
-    private static int nextNumber = 1000;
-    private int num;
+   
     private String custID;
     private String custName;
     private String custPhone;
@@ -23,8 +22,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int num, String custID, String custName, String custPhone, String posCode, String custAddress) {
-        this.num = num;
+    public Customer(String custID, String custName, String custPhone, String posCode, String custAddress) {
+       
         this.custID = custID;
         this.custName = custName;
         this.custPhone = custPhone;
@@ -45,21 +44,7 @@ public class Customer {
     
 
      
-    public static int getNextNumber() {
-        return nextNumber;
-    }
-
-    public static void setNextNumber(int nextNumber) {
-        Customer.nextNumber = nextNumber;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
+    
 
     public String getCustID() {
         return custID;
@@ -95,7 +80,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "num=" + num + ", custID=" + custID + ", custName=" + custName + ", custPhone=" + custPhone + ", custAddress=" + custAddress + '}';
+        return "Customer{ custID=" + custID + ", custName=" + custName + ", custPhone=" + custPhone + ", custAddress=" + custAddress + '}';
     }
      
      
