@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -28,7 +29,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
     private ListInterface<Delivery> deliveryList = new LList<Delivery>();
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     LocalDateTime now = LocalDateTime.now();
-    
+
     static ListInterface<CatalogProduct> allCatProdList = new LList<>();
     static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
@@ -47,43 +48,36 @@ public class OrderRecordMain extends javax.swing.JFrame {
         jTable1.setAutoCreateRowSorter(true);
         jTable3.setAutoCreateRowSorter(true);
     }
-     public OrderRecordMain(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizedFloral> allCustProdList ,ListInterface<Order> allSalesOrderList ,
-         ListInterface<OrderList> allOrderList ,ListInterface<ConsumerE> allConsumerList ,ListInterface<CooperateE> allCoopList ,
-         ListInterface<Delivery> allDeliveryList ,ListInterface<Pickup> allPickupList,ListInterface<Invoice> allInvoiceList){
-             this.allCatProdList=allCatProdList;
-             this.allConsumerList=allConsumerList;
-             this.allCoopList=allCoopList;
-             this.allCustProdList =allCustProdList;
-             this.allDeliveryList = allDeliveryList;
-             this.allInvoiceList=allInvoiceList;
-             this.allOrderList=allOrderList;
-             this.allPickupList=allPickupList;
-             this.allSalesOrderList=allSalesOrderList;
-             
-             initComponents();
+
+    public OrderRecordMain(ListInterface<CatalogProduct> allCatProdList, ListInterface<CustomizedFloral> allCustProdList, ListInterface<Order> allSalesOrderList,
+            ListInterface<OrderList> allOrderList, ListInterface<ConsumerE> allConsumerList, ListInterface<CooperateE> allCoopList,
+            ListInterface<Delivery> allDeliveryList, ListInterface<Pickup> allPickupList, ListInterface<Invoice> allInvoiceList) {
+        this.allCatProdList = allCatProdList;
+        this.allConsumerList = allConsumerList;
+        this.allCoopList = allCoopList;
+        this.allCustProdList = allCustProdList;
+        this.allDeliveryList = allDeliveryList;
+        this.allInvoiceList = allInvoiceList;
+        this.allOrderList = allOrderList;
+        this.allPickupList = allPickupList;
+        this.allSalesOrderList = allSalesOrderList;
+
+        initComponents();
         initialize();
         initialize1();
         refreshPickupTable();
         jTable1.setAutoCreateRowSorter(true);
         jTable3.setAutoCreateRowSorter(true);
-         }
-    
+    }
 
     public void initialize() {
-        pickupList=allPickupList;
-        deliveryList=allDeliveryList;
-        /*pickupList.add(new Pickup("PU001", "PU0001", "12-12-2018", "", "High", "Not pickup"));
-        pickupList.add(new Pickup("PU002", "PU0002", "12-12-2018", "", "Low", "Not pickup"));
-        pickupList.add(new Pickup("PU003", "PU0003", "12-12-2018", "", "Low", "Not pickup"));*/
+        pickupList = allPickupList;
+        deliveryList = allDeliveryList;
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
     }
 
     public void initialize1() {
-        /*deliveryList.add(new Delivery("OR001", "DL001", "", "12-12-2018", "", "", ""));
-        deliveryList.add(new Delivery("OR002", "DL002", "", "12-12-2018", " ", "", ""));
-        deliveryList.add(new Delivery("OR003", "DL003", "", "12-12-2018", "", "", ""));
-        deliveryList.add(new Delivery("OR004", "DL004", "", "12-12-2018", "", "", ""));*/
 
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         for (int i = 0; i < deliveryList.getNumberOfEntries(); i++) {
@@ -97,20 +91,19 @@ public class OrderRecordMain extends javax.swing.JFrame {
         jTable3.getColumnModel().getColumn(2).setPreferredWidth((jTable3.getSize().width) / 70 * 20);
         jTable3.getColumnModel().getColumn(3).setPreferredWidth((jTable3.getSize().width) / 60 * 20);
 
-        Didddl.removeAllItems();
-        Didddl.addItem("");
+        IDddl.removeAllItems();
+        IDddl.addItem("");
 
         //Hide all except DeliveryID
         DMddl.setVisible(false);
-        DMLabel.setVisible(false);
+        DMlbl.setVisible(false);
         DMddl.addItem("");
-        addddl.setVisible(false);
-        AddLabel.setVisible(false);
+        posCode.setVisible(false);
+        posCodelbl.setVisible(false);
         confirm.setVisible(false);
 
-        
         for (int i = 0; i < deliveryList.getNumberOfEntries(); i++) {
-            Didddl.addItem(deliveryList.getEntry(i+1).getDeliveryID().toString());
+            IDddl.addItem(deliveryList.getEntry(i + 1).getDeliveryID().toString());
         }
     }
 
@@ -118,7 +111,6 @@ public class OrderRecordMain extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int rowCount = model.getRowCount();
-        //  System.out.print(rowCount+"222");
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
@@ -131,13 +123,12 @@ public class OrderRecordMain extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         int rowCount = model.getRowCount();
-        //  System.out.print(rowCount+"222");
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
 
         for (int i = 0; i < deliveryList.getNumberOfEntries(); i++) {
-            model.addRow(new Object[]{deliveryList.getEntry(i + 1).getOrderID(), deliveryList.getEntry(i + 1).getAddress(), deliveryList.getEntry(i + 1).getDeliveryManName(), deliveryList.getEntry(i + 1).getDeliveredTime()});
+            model.addRow(new Object[]{deliveryList.getEntry(i + 1).getDeliveryID(), deliveryList.getEntry(i + 1).getAddress(), deliveryList.getEntry(i + 1).getDeliveryManName(), deliveryList.getEntry(i + 1).getDeliveredTime()});
         }
     }
 
@@ -159,13 +150,13 @@ public class OrderRecordMain extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         confirm = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
-        DeliLabel = new javax.swing.JLabel();
-        AddLabel = new javax.swing.JLabel();
-        Didddl = new javax.swing.JComboBox<>();
+        IDlbl = new javax.swing.JLabel();
+        posCodelbl = new javax.swing.JLabel();
+        IDddl = new javax.swing.JComboBox<String>();
         jLabel29 = new javax.swing.JLabel();
-        DMLabel = new javax.swing.JLabel();
-        addddl = new javax.swing.JComboBox<>();
-        DMddl = new javax.swing.JComboBox<>();
+        DMlbl = new javax.swing.JLabel();
+        DMddl = new javax.swing.JComboBox<String>();
+        posCode = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -321,31 +312,24 @@ public class OrderRecordMain extends javax.swing.JFrame {
             }
         });
 
-        DeliLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DeliLabel.setText("Delivery ID :");
+        IDlbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        IDlbl.setText("Delivery ID :");
 
-        AddLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        AddLabel.setText("Destination Area :");
+        posCodelbl.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        posCodelbl.setText("Destination PosCode :");
 
-        Didddl.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        Didddl.addActionListener(new java.awt.event.ActionListener() {
+        IDddl.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        IDddl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DidddlCtypeActionPerformed(evt);
+                IDddlCtypeActionPerformed(evt);
             }
         });
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel29.setText("Delivery man & route selection");
 
-        DMLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        DMLabel.setText("Delivery Man Name :");
-
-        addddl.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        addddl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addddlCtypeActionPerformed(evt);
-            }
-        });
+        DMlbl.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        DMlbl.setText("Delivery Man Name :");
 
         DMddl.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         DMddl.addActionListener(new java.awt.event.ActionListener() {
@@ -362,14 +346,14 @@ public class OrderRecordMain extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(DMLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DMlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DMddl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DeliLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AddLabel))
+                            .addComponent(IDlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(posCodelbl))
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -379,14 +363,14 @@ public class OrderRecordMain extends javax.swing.JFrame {
                                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel15Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Didddl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(IDddl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel15Layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(addddl, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(6, 6, 6)
+                                        .addComponent(posCode, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(135, 135, 135)
                 .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -399,17 +383,17 @@ public class OrderRecordMain extends javax.swing.JFrame {
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DeliLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Didddl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(IDlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IDddl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DMLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DMlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DMddl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addddl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                    .addComponent(posCodelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(posCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -516,14 +500,9 @@ public class OrderRecordMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addddlCtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addddlCtypeActionPerformed
+    private void IDddlCtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDddlCtypeActionPerformed
 
-        confirm.setVisible(true);
-    }//GEN-LAST:event_addddlCtypeActionPerformed
-
-    private void DidddlCtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DidddlCtypeActionPerformed
-
-        String D_ID = Didddl.getSelectedItem().toString();
+        String D_ID = IDddl.getSelectedItem().toString();
 
         if (D_ID == "DL0001") {
             DMddl.removeAllItems();
@@ -531,7 +510,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
             DMddl.addItem("Muhd");
             DMddl.addItem("Low");
             DMddl.addItem("Abu");
-            DMLabel.setVisible(true);
+            DMlbl.setVisible(true);
             DMddl.setVisible(true);
         } else if (D_ID == "DL0002") {
             DMddl.removeAllItems();
@@ -539,7 +518,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
             DMddl.addItem("Muhd");
             DMddl.addItem("Low");
             DMddl.addItem("Abu");
-            DMLabel.setVisible(true);
+            DMlbl.setVisible(true);
             DMddl.setVisible(true);
         } else if (D_ID == "DL0003") {
             DMddl.removeAllItems();
@@ -547,7 +526,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
             DMddl.addItem("Muhd");
             DMddl.addItem("Low");
             DMddl.addItem("Abu");
-            DMLabel.setVisible(true);
+            DMlbl.setVisible(true);
             DMddl.setVisible(true);
         } else if (D_ID == "DL0004") {
             DMddl.removeAllItems();
@@ -555,46 +534,64 @@ public class OrderRecordMain extends javax.swing.JFrame {
             DMddl.addItem("Muhd");
             DMddl.addItem("Low");
             DMddl.addItem("Abu");
-            DMLabel.setVisible(true);
+            DMlbl.setVisible(true);
             DMddl.setVisible(true);
         }
-    }//GEN-LAST:event_DidddlCtypeActionPerformed
+    }//GEN-LAST:event_IDddlCtypeActionPerformed
 
     private void jButton16jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16jButton2ActionPerformed
-        //what will change?
-        // the table there add the sleected item
-        // imean the value? which value ? ini ?
+
     }//GEN-LAST:event_jButton16jButton2ActionPerformed
 
     private void confirmjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmjButton1ActionPerformed
-        if (Didddl.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Please select Delivery ID !");
-        }
-           else if (DMddl.getSelectedIndex() == 0) {
-                JOptionPane.showMessageDialog(null, "Please select Delivery Man !");
-           }
-              else if (addddl.getSelectedIndex() == 0) {
-                    JOptionPane.showMessageDialog(null, "Please select Destination Area !");
-                } else {
-                    for(int i=0;i<deliveryList.getNumberOfEntries();i++){
-                        System.out.println(deliveryList.getEntry(i+1).getDeliveryID().equals(Didddl.getSelectedItem().toString()));
-                      
-                        if(deliveryList.getEntry(i+1).getDeliveryID().equals(Didddl.getSelectedItem().toString())){
-                            deliveryList.getEntry(i+1).setDeliveryManName(DMddl.getSelectedItem().toString());
-                            deliveryList.getEntry(i+1).setAddress(addddl.getSelectedItem().toString());
-                            System.out.print(deliveryList.getEntry(i+1).getAddress());
-                            
-                        }
-                    }
-                    System.out.print("ok");
-                    JOptionPane.showMessageDialog(null, "Delivery Man Assigned !");
-                }
-            
 
-            
-        
+        Random random = new Random();
+        int Setapak = random.nextInt(25) + 10;
+        int Subang = random.nextInt(45) + 25;
+        int Kepong = random.nextInt(30) + 15;
+        int Rawang = random.nextInt(55) + 30;
+
+        if (IDddl.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Please select Delivery ID !");
+        } else if (DMddl.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Please select Delivery Man !");
+        } else if (posCode.getText().length() == 5 && posCode.getText().toString() != null && !posCode.getText().toString().matches("[0-9]+")) {
+            if (posCode.getText().toString() == "53000" || posCode.getText().toString() == "54000") {
+                System.out.print("Estimated Time Arrival : " + Setapak + "minutes");
+                JOptionPane.showMessageDialog(null, "Destination area : Setapak", "Confirmation", JOptionPane.YES_NO_OPTION);
+            } else if (posCode.getText().toString() == "40150" || posCode.getText().toString() == "47500") {
+                System.out.print("Estimated Time Arrival : " + Subang + "minutes");
+                JOptionPane.showMessageDialog(null, "Destination area : Subang", "Confirmation", JOptionPane.YES_NO_OPTION);
+            } else if (posCode.getText().toString() == "51200" || posCode.getText().toString() == "52200") {
+                System.out.print("Estimated Time Arrival : " + Kepong + "minutes");
+                JOptionPane.showMessageDialog(null, "Destination area : Kepong", "Confirmation", JOptionPane.YES_NO_OPTION);
+            } else if (posCode.getText().toString() == "47000" || posCode.getText().toString() == "48000") {
+                System.out.print("Estimated Time Arrival : " + Rawang + "minutes");
+                JOptionPane.showMessageDialog(null, "Destination area : Rawang", "Error", JOptionPane.YES_NO_OPTION);
+            } else {
+                JOptionPane.showMessageDialog(null, "Not valid Zip Codes entered !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Post code must be 5 integers", "Error", JOptionPane.YES_NO_OPTION);
+        }
+
+        for (int i = 0; i < deliveryList.getNumberOfEntries(); i++) {
+            System.out.println(deliveryList.getEntry(i + 1).getDeliveryID().equals(IDddl.getSelectedItem().toString()));
+
+            if (deliveryList.getEntry(i + 1).getDeliveryID().equals(IDddl.getSelectedItem().toString())) {
+                deliveryList.getEntry(i + 1).setDeliveryManName(DMddl.getSelectedItem().toString());
+
+                System.out.print(deliveryList.getEntry(i + 1).getAddress());
+
+            }
+
+            System.out.print("ok");
+            JOptionPane.showMessageDialog(null, "Delivery Man Assigned !");
+        }
+
         refreshDeliveryTable();
-        //deliveryList.add(new Delivery(DeliveryID.getSelectedItem().toString(),DeliveryManName.getSelectedItem(),address.getSelectedItem()));
+
+        refreshDeliveryTable();
     }//GEN-LAST:event_confirmjButton1ActionPerformed
 
     private void confirmjButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmjButton1MouseClicked
@@ -602,7 +599,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
         String DID = "";
         for (int j = 0; j < deliveryList.getNumberOfEntries(); j++) {
             if (deliveryList.getEntry(j + 1).getDeliveryManName().equals(DMddl.getSelectedItem().toString())) {
-                DID = deliveryList.getEntry(j+1).getDeliveryID();
+                DID = deliveryList.getEntry(j + 1).getDeliveryID();
             }
 
         }
@@ -616,7 +613,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
         int yesno = JOptionPane.showConfirmDialog(null, "Confirm delivered?", "INFORMATION", JOptionPane.YES_NO_OPTION);
 
         if (yesno == 0) {
-            deliveryList.getEntry(rowSelected + 1).setDeliveredTime(dtf.format(now));
+            deliveryList.getEntry(rowSelected + 1).setDeliveredTime("Delivered at " + dtf.format(now));
 
             refreshDeliveryTable();
         }
@@ -639,38 +636,17 @@ public class OrderRecordMain extends javax.swing.JFrame {
         String Dmname = DMddl.getSelectedItem().toString();
 
         if (Dmname == "Kong") {
-            addddl.removeAllItems();
-            addddl.addItem("Setapak");
-            addddl.addItem("Subang");
-            addddl.addItem("Genting Kelang");
-            addddl.addItem("Kepong");
-            addddl.setVisible(true);
-            AddLabel.setVisible(true);
+            posCode.setVisible(true);
+            posCodelbl.setVisible(true);
         } else if (Dmname == "Muhd") {
-            addddl.removeAllItems();
-            addddl.addItem("Setapak");
-            addddl.addItem("Subang");
-            addddl.addItem("Genting Kelang");
-            addddl.addItem("Kepong");
-            addddl.setVisible(true);
-            AddLabel.setVisible(true);
+            posCode.setVisible(true);
+            posCodelbl.setVisible(true);
         } else if (Dmname == "Low") {
-            addddl.removeAllItems();
-            addddl.addItem("Setapak");
-            addddl.addItem("Subang");
-            addddl.addItem("Genting Kelang");
-            addddl.addItem("Kepong");
-            addddl.setVisible(true);
-            AddLabel.setVisible(true);
+            posCode.setVisible(true);
+            posCodelbl.setVisible(true);
         } else if (Dmname == "Abu") {
-            addddl.removeAllItems();
-            addddl.addItem("Setapak");
-            addddl.addItem("Subang");
-            addddl.addItem("Genting Kelang");
-            addddl.addItem("Kepong");
-            addddl.setVisible(true);
-            AddLabel.setVisible(true);
-            /*jsnshshshsh*/
+            posCode.setVisible(true);
+            posCodelbl.setVisible(true);
         }
 
 
@@ -678,9 +654,9 @@ public class OrderRecordMain extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        allDeliveryList=deliveryList;
-        allPickupList=pickupList;
-        new Homepage(allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
+        allDeliveryList = deliveryList;
+        allPickupList = pickupList;
+        new Homepage(allCatProdList, allCustProdList, allSalesOrderList, allOrderList, allConsumerList, allCoopList, allDeliveryList, allPickupList, allInvoiceList).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -728,12 +704,10 @@ public class OrderRecordMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AddLabel;
-    private javax.swing.JLabel DMLabel;
     private javax.swing.JComboBox<String> DMddl;
-    private javax.swing.JLabel DeliLabel;
-    private javax.swing.JComboBox<String> Didddl;
-    private javax.swing.JComboBox<String> addddl;
+    private javax.swing.JLabel DMlbl;
+    private javax.swing.JComboBox<String> IDddl;
+    private javax.swing.JLabel IDlbl;
     private javax.swing.JButton confirm;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton6;
@@ -753,5 +727,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTextField posCode;
+    private javax.swing.JLabel posCodelbl;
     // End of variables declaration//GEN-END:variables
 }

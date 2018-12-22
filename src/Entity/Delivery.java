@@ -18,15 +18,17 @@ public class Delivery {
     private String posCode;
     private String address;
 
-    public Delivery(Order order, String deliveryID, String deliveryManName, String deliveryDate, String deliveredTime, String posCode, String address) {
-        this.order = order;
+    public Delivery(String deliveryID) {
+        this.deliveryID = deliveryID;
+    }
+
+    public Delivery(String deliveryID, String deliveryManName, String deliveredTime, String posCode) {
         this.deliveryID = deliveryID;
         this.deliveryManName = deliveryManName;
-        this.deliveryDate = deliveryDate;
         this.deliveredTime = deliveredTime;
         this.posCode = posCode;
-        this.address = address;
     }
+
 
     
 
