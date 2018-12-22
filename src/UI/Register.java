@@ -471,6 +471,12 @@ public class Register extends javax.swing.JFrame {
                         custList.add(cons);
                         JOptionPane.showMessageDialog(null, "Success Create a consumer");
                         System.out.println(cons.toString());
+                        custID.setText("CO"+ConsumerE.getNextNumber());
+                        custContact.setText("");
+                        custName.setText("");
+                        Male.setSelected(true);
+                        PostCo.setText("");
+                        custAddress.setText("");
                 }
                 }
                else if(Male.isSelected()==true){
@@ -481,16 +487,17 @@ public class Register extends javax.swing.JFrame {
                         custList.add(cons);
                         JOptionPane.showMessageDialog(null, "Success Create a consumer");
                         System.out.println(cons.toString());
+                         custID.setText("CO"+ConsumerE.getNextNumber());
+                        custContact.setText("");
+                        custName.setText("");
+                        Male.setSelected(true);
+                        PostCo.setText("");
+                        custAddress.setText("");
+                
                 }
                  
                } 
-                custID.setText("CO"+ConsumerE.getNextNumber());
-                custContact.setText("");
-                custName.setText("");
-                Male.setSelected(true);
-                PostCo.setText("");
-                custAddress.setText("");
-                
+               
             }
          
     }//GEN-LAST:event_jButton1ActionPerformed
