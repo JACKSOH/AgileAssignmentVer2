@@ -601,7 +601,7 @@ return validate;
            if(selection==0){
                if(watever.getSelection().getActionCommand().toLowerCase().equals("individual")){
                    if(consumer==null){
-                       consumer.setCustID("CO"+consumer.getNum());
+                   consumer.setCustID("CO"+consumer.getNum());
                    consumer.setCustName(tfCustName.getText());
                    consumer.setCustPhone(tfCustPhone.getText());
                    consumer.setCustAddress(taAddress.getText());
@@ -615,7 +615,7 @@ return validate;
                    changeAllListToConfirm();
                    
                }else if(watever.getSelection().getActionCommand().toLowerCase().equals("coop")){
-                    order1.setCooperate(cooperate);
+                   order1.setCooperate(cooperate);
                    order1.setOrderType(DorP.getSelection().getActionCommand());
                    order1.setOrderStatus("confirm");
                    order1.setTotalAmount(totalAmount);

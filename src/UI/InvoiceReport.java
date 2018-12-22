@@ -20,50 +20,45 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entity.*;
+import java.awt.List;
 /**
  *
  * @author Student
  */
 public class InvoiceReport extends javax.swing.JFrame {
-    static ListInterface<CatalogProduct> allCatProdList = new LList<>();
-    static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
-    static ListInterface<Order> allSalesOrderList = new LList<>();
-    static ListInterface<OrderList> allOrderList = new LList<>();
-    static ListInterface<ConsumerE> allConsumerList = new LList<>();
-    static ListInterface<CooperateE> allCoopList = new LList<>();
-    static ListInterface<Delivery> allDeliveryList = new LList<>();
-    static ListInterface<Pickup> allPickupList = new LList<>();
-    static ListInterface<Invoice> allInvoiceList = new LList<>();
     
        ListInterface<Order> orderList = new LList();
-    static final java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat("dd/MM/yyyy");
+       ListInterface<CooperateE> cooList=new LList();
+       ListInterface<Invoice> invoice=new LList();
+       String custD="";
+       double totalmout=0;
+       
     /**
      * Creates new form Invoice
      */
     public InvoiceReport() {
         initComponents();
-        ListCoNa.addItem("SBS Company.BHD");
-        ListCoNa.addItem("KL Company.BHD");
-        ListCoNa.addItem("Test Company.BHD");
-    }
-    public InvoiceReport(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizedFloral> allCustProdList ,ListInterface<Order> allSalesOrderList ,
-         ListInterface<OrderList> allOrderList ,ListInterface<ConsumerE> allConsumerList ,ListInterface<CooperateE> allCoopList ,
-         ListInterface<Delivery> allDeliveryList ,ListInterface<Pickup> allPickupList,ListInterface<Invoice> allInvoiceList){
-         this.allCatProdList=allCatProdList;
-             this.allConsumerList=allConsumerList;
-             this.allCoopList=allCoopList;
-             this.allCustProdList =allCustProdList;
-             this.allDeliveryList = allDeliveryList;
-             this.allInvoiceList=allInvoiceList;
-             this.allOrderList=allOrderList;
-             this.allPickupList=allPickupList;
-             this.allSalesOrderList=allSalesOrderList;
+        CooperateE p1=new CooperateE(1000,"CP1000","SBS Company.BHD","011-11194912","45300","test address 1");
+        CooperateE p2=new CooperateE(888,"CP1001","KL Company.BHD","012-3456789","55300","test address 2");
+        CooperateE p3=new CooperateE(999,"CP1002","Test Company.BHD","012-4567893","97782","test address 3");
+        cooList.add(p1);
+        cooList.add(p2);
+        cooList.add(p3);
+        orderList.add(new Order(p1,"OL0001","Unpay","delivery",99.00));
+        orderList.add(new Order(p1,"OL0002","Unpay","pickup",100.00));
+        orderList.add(new Order(p1,"OL0003","Unpay","delivery",50.00));
+        orderList.add(new Order(p2,"OL0004","Unpay","pickup",40.00));
+        orderList.add(new Order(p2,"OL0005","Unpay","delivery",20.00));
+        orderList.add(new Order(p2,"OL0006","Unpay","pickup",88.00));
+        orderList.add(new Order(p3,"OL0007","Unpay","delivery",77.00));
+        orderList.add(new Order(p3,"OL0008","Unpay","pickup",66.00));
+        orderList.add(new Order(p3,"OL0009","Unpay","delivery",55.00));
         
-        initComponents();
-        ListCoNa.addItem("SBS Company.BHD");
-        ListCoNa.addItem("KL Company.BHD");
-        ListCoNa.addItem("Test Company.BHD");
+        for(int i=0;i<cooList.getNumberOfEntries();i++){
+            ListCoNa.addItem(cooList.getEntry(i+1).getCustName());
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,7 +70,6 @@ public class InvoiceReport extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -96,13 +90,6 @@ public class InvoiceReport extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Monthly Invoice");
 
-        jButton6.setText("Back");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -110,17 +97,13 @@ public class InvoiceReport extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -135,17 +118,9 @@ public class InvoiceReport extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Order Number", "Order Day", "Cost", "Payment Status"
+                "Amount", "Due Date", "Status"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Generate");
@@ -179,7 +154,6 @@ public class InvoiceReport extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -188,15 +162,16 @@ public class InvoiceReport extends javax.swing.JFrame {
                         .addComponent(jButton2))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(288, 288, 288)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(63, 63, 63)
                         .addComponent(btnPrint)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(335, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,9 +183,9 @@ public class InvoiceReport extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPrint)
                     .addComponent(jButton1))
@@ -235,7 +210,8 @@ public class InvoiceReport extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,58 +219,55 @@ public class InvoiceReport extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if(ListCoNa.getSelectedItem()=="SBS Company.BHD"){
-            
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            int rowCount = model.getRowCount();
-        //Remove rows one by one from the end of the table
-            for (int i = rowCount - 1; i >= 0; i--) {
-                model.removeRow(i);
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        ourJavaDateObject.setDate(ourJavaDateObject.getDate()+7);
+        model.setRowCount(0);
+        for(int i=0;i<cooList.getNumberOfEntries();i++){
+            if(ListCoNa.getSelectedItem()==cooList.getEntry(i+1).getCustName()){
+                for(int y=0;y<orderList.getNumberOfEntries();y++){
+                    if(cooList.getEntry(i+1).getCustID()==orderList.getEntry(y+1).getCooperate().getCustID()){
+                        custD=cooList.getEntry(i+1).getCustID();
+              
+                                model.addRow(new Object[]{orderList.getEntry(y+1).getTotalAmount(),
+                                ourJavaDateObject,
+                                orderList.getEntry(y+1).getOrderStatus()});
+                                totalmout+=orderList.getEntry(y+1).getTotalAmount();
+                               
+
+                }
+                     
+            }
         }
-            model.addRow(new Object[]{50,"19-07-2018","RM 50","Paid"});
-            model.addRow(new Object[]{90,"24-07-2018","RM 90","Unpaid"});
-            model.addRow(new Object[]{40,"31-07-2018","RM 50","Unpaid"});
-        }
-        else if(ListCoNa.getSelectedItem()=="KL Company.BHD"){
-            
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-               int rowCount = model.getRowCount();
-        //Remove rows one by one from the end of the table
-            for (int i = rowCount - 1; i >= 0; i--) {
-                model.removeRow(i);
-        }
-            model.addRow(new Object[]{40,"05-07-2018","RM 40","Unpaid"});
-            model.addRow(new Object[]{90,"17-07-2018","RM 90","Unpaid"});
-            model.addRow(new Object[]{40,"19-07-2018","RM 40","Unpaid"});
-            model.addRow(new Object[]{70,"24-07-2018","RM 70","Unpaid"});
-        }
-         else if(ListCoNa.getSelectedItem()=="Test Company.BHD"){
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-               int rowCount = model.getRowCount();
-        //Remove rows one by one from the end of the table
-            for (int i = rowCount - 1; i >= 0; i--) {
-                model.removeRow(i);
-        }
-            model.addRow(new Object[]{99,"08-07-2018","RM 99","Unpaid"});
-            model.addRow(new Object[]{63,"17-07-2018","RM 63","Unpaid"});
-            model.addRow(new Object[]{88,"19-07-2018","RM 88","Unpaid"});
-            model.addRow(new Object[]{44,"24-07-2018","RM 44","Unpaid"});
-        }
+        }   
+      
+            model.addRow(new Object[]{" ","Total :", totalmout});  
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here: 
-         Calendar calendar = Calendar.getInstance();
+         
+        Calendar calendar = Calendar.getInstance();
         java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        String data="";
+        for (int row = 0; row < model.getRowCount(); row++){
+            for (int column = 0; column < model.getColumnCount(); column++){
+                data+=model.getValueAt(row, column).toString()+"\t\t";
+            }
+            data+="\n";
+        }
      taInvoice.setText("\t\t Invoice \n\n"
-             + "Customer ID:\t\t\t"
-             + "\nCustomer Name:\t\t\t"
+             + "Customer ID: "+custD+"\t\t\t"
+             + "\nCustomer Name: "+ListCoNa.getSelectedItem()+"\t\t\t"
              + "\n==========================================================\n"
-             + "\n\nDate:\t\t\t "
+             + "\n\nDate: "+ourJavaDateObject+"\t\t\t "
              + "\n\n\t\t Invoice "
              + "\n==========================================================\n"
              + "Amount\t\t Due Date\t\t Status "
              + "\n==========================================================\n"
+             + data
             );
 
     /*try{
@@ -316,19 +289,18 @@ public class InvoiceReport extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
         try{
      taInvoice.print();
+     invoice.add(new Invoice(custD,ListCoNa.getSelectedItem().toString(),totalmout,ourJavaDateObject));
+     System.out.println(invoice.toString());
  }catch(PrinterException ex){
      System.out.print(ex.getMessage());
  }
     }//GEN-LAST:event_btnPrintActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-       
-        new Homepage(allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,6 +331,10 @@ public class InvoiceReport extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -373,7 +349,6 @@ public class InvoiceReport extends javax.swing.JFrame {
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
