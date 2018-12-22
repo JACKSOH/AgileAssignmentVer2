@@ -24,7 +24,7 @@ import javax.swing.table.TableRowSorter;
  * @author User
  */
 public class PromotionDetail extends javax.swing.JFrame {
-static ListInterface<CatalogProduct> allCatProdList = new LList<>();
+    static ListInterface<CatalogProduct> allCatProdList = new LList<>();
     static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
     static ListInterface<OrderList> allOrderList = new LList<>();
@@ -57,11 +57,12 @@ static ListInterface<CatalogProduct> allCatProdList = new LList<>();
              initComponents();
              initialize();
     }
+   
     public void initialize(){
-        CatalogProduct cp = new CatalogProduct("FL001","Lily","Bouquet","Available","Funny",120.00,120);
-        CatalogProduct cp1 = new CatalogProduct("FL002","Rose","Floral arrangement","Remaining Stock Rarely","Funny",120.00,30);
-        CatalogProduct cp2 = new CatalogProduct("FL003","Carnation","Bouquet","Out-of-Stock","Funny",120.00,1);
-        CatalogProduct cp3 = new CatalogProduct("FL004","Tuplis","Fresh Flower","Available","Funny",120.00,120); 
+        CatalogProduct cp = new CatalogProduct("Lily","Bouquet","Available","Funny",120,"FL001",120.00);
+        CatalogProduct cp1 = new CatalogProduct("Rose","Floral arrangement","Remaining Stock Rarely","Funny",30,"FL002",120.00);
+        CatalogProduct cp2 = new CatalogProduct("Carnation","Bouquet","Out-of-Stock","Funny",1,"FL003",120.00);
+        CatalogProduct cp3 = new CatalogProduct("Tuplis","Fresh Flower","Available","Funny",120,"FL004",120.00); 
         productList.add(cp);
         productList.add(cp1);
         productList.add(cp2);
@@ -458,7 +459,7 @@ static ListInterface<CatalogProduct> allCatProdList = new LList<>();
                         String Type = Product.getValueAt(index[i], 2).toString();
                         Double price = Double.parseDouble(Product.getValueAt(index[i], 3).toString());
                         int quantity = Integer.parseInt(Product.getValueAt(index[i], 4).toString());   
-                    CatalogProduct p = new CatalogProduct(ID,Name,Type,price,quantity);
+                    CatalogProduct p = new CatalogProduct(Name,Type,quantity,ID,price);
                     productList.add(p);
                     //Promotion List
                     PromotionList promo = new PromotionList(p,promotion,GenerateNextPLID());

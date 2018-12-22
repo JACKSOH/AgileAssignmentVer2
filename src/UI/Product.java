@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class Product extends javax.swing.JFrame {
- static ListInterface<CatalogProduct> allCatProdList = new LList<>();
+    static ListInterface<CatalogProduct> allCatProdList = new LList<>();
     static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
     static ListInterface<OrderList> allOrderList = new LList<>();
@@ -745,7 +745,7 @@ public class Product extends javax.swing.JFrame {
         int quantity = Integer.parseInt(Quantity.getText());
         double price = Double.parseDouble(Price.getText());
         String description = fDescription.getText();
-        CatalogProduct flower = new CatalogProduct(GenerateNextFLID(),name,type,Status(),description,price,quantity);
+        CatalogProduct flower = new CatalogProduct(name,type,Status(),description,quantity,GenerateNextFLID(),price);
         productList.add(flower);
         System.out.println(productList);      
             Image.setIcon(null);
