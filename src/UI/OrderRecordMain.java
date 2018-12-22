@@ -544,7 +544,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16jButton2ActionPerformed
 
     private void confirmjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmjButton1ActionPerformed
-
+//eksdee
         Random random = new Random();
         int Setapak = random.nextInt(25) + 10;
         int Subang = random.nextInt(45) + 25;
