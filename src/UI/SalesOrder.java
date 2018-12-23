@@ -236,7 +236,17 @@ static Order order;
         String string =""; // string for generate sales detailss
         double totalAmt=0.00;
         System.out.print("hi"+orderList.getNumberOfEntries());
+        if(orderList.getEntry(1).getCustomizeProduct()!=null){
+            string +="Order List ID:\t"+orderList.getEntry(1).getOLID()
+                +"\nProduct ID\t Size\t Style\t\t Unit Price\t\t Order Quatity\n"+orderList.getEntry(1).getCustomizeProduct().getProdID()
+                +"\t"+orderList.getEntry(1).getCustomizeProduct().getSize()+"\t"+orderList.getEntry(1).getCustomizeProduct().getStyle()+"\t\tRM"+String.format("%.2f", orderList.getEntry(1).getCustomizeProduct().getProdPrice())+"\t\t"+"1"
+                +"\n----------------------------------------------------------------------------------------------------------------------------------------\n"
+                +"Ammount:"+String.format("%.2f", orderList.getEntry(1).getCustomizeProduct().getProdPrice())
+                +"\n----------------------------------------------------------------------------------------------------------------------------------------\n\n";
+        totalAmt+=orderList.getEntry(1).getCustomizeProduct().getProdPrice();
+        }else{
         for(int i=0;i<orderList.getNumberOfEntries();i++){
+            
         string +="Order List ID:\t"+orderList.getEntry(i+1).getOLID()
                 +"\nProduct ID\t Product Name\t\t Unit Price\t\t Order Quatity\n"+orderList.getEntry(i+1).getCatalogProduct().getProdID()
                 +"\t"+orderList.getEntry(i+1).getCatalogProduct().getProdName()+"\t\tRM"+String.format("%.2f", orderList.getEntry(i+1).getCatalogProduct().getProdPrice())+"\t\t"+orderList.getEntry(i+1).getQuantity()
@@ -244,7 +254,8 @@ static Order order;
                 +"Ammount:"+String.format("%.2f", orderList.getEntry(i+1).getCatalogProduct().getProdPrice()*Integer.parseInt(orderList.getEntry(i+1).getQuantity()))
                 +"\n----------------------------------------------------------------------------------------------------------------------------------------\n\n";
         totalAmt+=orderList.getEntry(i+1).getCatalogProduct().getProdPrice()*Integer.parseInt(orderList.getEntry(i+1).getQuantity());
-    }
+            }
+        }
         taSales.setText(string+"\t\t\t\t Total Amount:RM\t"+totalAmt);
     }
     /**

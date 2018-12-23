@@ -526,7 +526,7 @@ public class ConfirmOrder extends javax.swing.JFrame {
                     tfCustName.setEditable(false);
                     tfCustPhone.setEditable(false);
                     taAddress.setEditable(false);
-                    monthlyCredit =coopCustList.getEntry(i+1).getCustLimit();
+                    //monthlyCredit =coopCustList.getEntry(i+1).getCustLimit();
                     //lblCredit.setText("Credit left: "+monthlyCredit);
                     lblCredit.setVisible(false);
                     consumer=allConsumerList.getEntry(i+1);
@@ -600,13 +600,14 @@ public class ConfirmOrder extends javax.swing.JFrame {
     }
      public String determineArea(String posCode){
          String Area="";
-         if (posCode == "53300" || posCode == "53200") {
+         System.out.println(posCode+"hiih");
+         if (posCode.equals("53300") || posCode.equals("53200")) {
               Area ="Setapak";
-            } else if (posCode == "40150" || posCode == "47500") {
+            } else if (posCode.equals("40150") || posCode.equals("47500")) {
                 Area ="Subang";
-            } else if (posCode == "51200" || posCode == "52200") {
+            } else if (posCode.equals("51200") || posCode.equals("52200")) {
                  Area ="Kepong";
-            } else if (posCode == "47000" || posCode == "48000") {
+            } else if (posCode.equals("47000") || posCode.equals("48000")) {
                 Area ="Rawang";
                 
             } else {
@@ -627,7 +628,7 @@ public class ConfirmOrder extends javax.swing.JFrame {
           }
       else{
       name = tfCustName.getText();
-          
+          System.out.println(rbCoop.isSelected());
           if( !name.matches("^(([A-Z]|[a-z]|\\s){1,30})*$")){
               JOptionPane.showMessageDialog(null,"Name should not include number or exceed 30 words", "WARNING",JOptionPane.ERROR_MESSAGE);
              
@@ -640,11 +641,15 @@ public class ConfirmOrder extends javax.swing.JFrame {
                      }else if(!tfPostal.getText().matches("\\d{5}")){
                          JOptionPane.showMessageDialog(null,"Postal Code Format Error \nE.g 12345", "WARNING",JOptionPane.ERROR_MESSAGE);
                      }else if(totalAmount!=0.00){
-                        
+                         System.out.println(rbCoop.isSelected());
+                        if(rbCoop.isSelected()){
                          if(totalAmount>monthlyCredit){
                              
                              JOptionPane.showMessageDialog(null,"Monthly credit exceeded!!!", "WARNING",JOptionPane.ERROR_MESSAGE);
                          }else{
+                             validate=true;
+                         }
+                        }else{
                              validate=true;
                          }
                          

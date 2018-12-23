@@ -127,8 +127,9 @@ public class CustomizedFloral extends javax.swing.JFrame {
         allCustProdList.add(cp1);
         allCustProdList.add(cp);
         
-        OrderList orderlist1 = new OrderList(cp,order1,"OL001","1");
+        OrderList orderlist1 = new OrderList(cp,order1,GenerateNextOLID(),"1");
         allOrderList.add(orderlist1);
+        System.out.print(allOrderList.getNumberOfEntries());
         
         
         

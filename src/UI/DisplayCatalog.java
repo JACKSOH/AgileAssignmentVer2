@@ -99,30 +99,9 @@ public void initialize(){
    orderList=allOrderList;
    
    jLabel3.setVisible(false);
-   //insert dummy flower data
-   // for sales table use
    
-    
-              //insert dummy order data
-       /* ConsumerE consumer= new ConsumerE("CP1000","POPPY","017-99912345","Jalan Pokong \n 99999");
-        CooperateE cooperate = new CooperateE("CO1000","MEOW Sdn Bhd","012-1231231",200.00,"Jalan Pokok \n 010100");
-        salesOrderList.add(new Order(consumer,"OR0001","confirm","delivery",200.00));
-        salesOrderList.add(new Order(cooperate,"OR0002","confirm","pickup",200.00));
-        salesOrderList.add(new Order(consumer,"OR0003","confirm","delivery",200.00));
-        
-         orderList.add(new OrderList(prodList.getEntry(2),salesOrderList.getEntry(1),"OL0001","2"));
-         orderList.add(new OrderList(prodList.getEntry(3),salesOrderList.getEntry(2),"OL0002","4"));
-         orderList.add(new OrderList(prodList.getEntry(5),salesOrderList.getEntry(1),"OL0003","2"));
-         orderList.add(new OrderList(prodList.getEntry(4),salesOrderList.getEntry(3),"OL0001","3"));*/
-       
           order.setOrderID(GenerateNextORID());//everytime the class is called add new one.
           order.setOrderStatus("processing");
-   /*orderList.add(new OrderList("OL0001","CP001","2","OR0001"));
-      orderList.add(new OrderList("OL0002","CP002","1","OR0001"));
-         orderList.add(new OrderList("OL0003","CP010","3","OR0001"));
-            orderList.add(new OrderList("OL0004","CP003","1","OR0001"));*/
-   
-            //  System.out.print(prodList.getNumberOfEntries());
               //clear all the order item
               
               Flowerddl.removeAllItems(); // make sure nothing in ddl
@@ -136,7 +115,7 @@ public void initialize(){
             for(int j =0;j<Flowerddl.getItemCount();j++){
                 
                 if(prodList.getEntry(i+1).getProdType().equals(Flowerddl.getItemAt(j+1))){
-                 //   System.out.println(prodList.getEntry(i+1).getProdType());
+                 
                     containsInDDL++;
                 }
             }
@@ -147,7 +126,7 @@ public void initialize(){
             
             }
     }else{
-            //System.out.print(prodList.getEntry(i+1).getProdName());
+           
             Flowerddl.addItem(prodList.getEntry(i+1).getProdType().toString()); // if no item, add it
         }
     }
@@ -168,21 +147,7 @@ public void initialize(){
         errorMsg.setVisible(false);
       
        // current order ini
-        /*DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-       for(int i=0;i<orderList.getNumberOfEntries();i++){
-           for(int j=0;j<prodList.getNumberOfEntries();j++){
-            //   System.out.println(prodList.getEntry(j+1).getProdName());
-            
-               if(orderList.getEntry(i+1).getCatalogProduct().getProdID().equals(prodList.getEntry(j+1).getProdID())){
-                   model.addRow(new Object[]{prodList.getEntry(j+1).getProdName(),orderList.getEntry(i+1).getQuantity()});
-               
-               }
-//           }else if(orderList.getEntry(i+1).getCustomizeProduct().getProdID().equals(allCustProdList.getEntry(j+1).getProdID())){
-//               model.addRow(new Object[]{allCustProdList.getEntry(j+1).getProdID(),orderList.getEntry(i+1).getQuantity()});
-//           }
-           
-       }
-       }*/
+      
         refreshOrderTable();
         refreshSalesOrderTable();
      jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -589,7 +554,7 @@ public void initialize(){
     public void refreshSalesOrderTable(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int rowCount = model.getRowCount();
-      //  System.out.print(rowCount+"222");
+  
         for (int i = rowCount - 1; i >= 0; i--) {
     model.removeRow(i);
 }
@@ -609,7 +574,7 @@ public void initialize(){
         totalAmt=0.00;
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         int rowCount = model.getRowCount();
-      //  System.out.print(rowCount+"222");
+   
         for (int i = rowCount - 1; i >= 0; i--) {
     model.removeRow(i);
 }
