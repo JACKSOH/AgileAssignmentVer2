@@ -83,18 +83,6 @@ public class OrderRecordMain extends javax.swing.JFrame {
             DMddl.addItem("Muhd");
             DMddl.addItem("Low");
             DMddl.addItem("Abu");
-
-        
-//
-//        jTable3.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        jTable3.getSize();
-//        jTable3.getColumnModel().getColumn(0).setPreferredWidth((jTable3.getSize().width) / 120 * 20);
-//        jTable3.getColumnModel().getColumn(1).setPreferredWidth((jTable3.getSize().width) / 70 * 20);
-//        jTable3.getColumnModel().getColumn(2).setPreferredWidth((jTable3.getSize().width) / 70 * 20);
-//        jTable3.getColumnModel().getColumn(3).setPreferredWidth((jTable3.getSize().width) / 60 * 20);
-
-       
-
         //Hide all except DeliveryID
       
         DMddl.addItem("");
