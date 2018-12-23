@@ -25,6 +25,11 @@ public class CooperateE extends Customer{
         this.custLimit = custLimit;
     }
 
+    public CooperateE(double custLimit, String custID, String custName, String custPhone, String posCode, String custAddress) {
+        super(custID, custName, custPhone, posCode, custAddress);
+        this.custLimit = custLimit;
+    }
+
    
     public double getCustLimit() {
         return custLimit;

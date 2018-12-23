@@ -24,6 +24,11 @@ public class ConsumerE extends Customer{
         super(num, custID, custName, custPhone, posCode, custAddress);
         this.gender = gender;
     }
+
+    public ConsumerE(String gender, String custID, String custName, String custPhone, String posCode, String custAddress) {
+        super(custID, custName, custPhone, posCode, custAddress);
+        this.gender = gender;
+    }
     
    
     public String getGender() {

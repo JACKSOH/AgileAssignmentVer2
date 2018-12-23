@@ -32,6 +32,14 @@ public class Customer {
         this.custAddress = custAddress;
     }
 
+    public Customer(String custID, String custName, String custPhone, String posCode, String custAddress) {
+        this.custID = custID;
+        this.custName = custName;
+        this.custPhone = custPhone;
+        this.posCode = posCode;
+        this.custAddress = custAddress;
+    }
+
     
     public String getPosCode() {
         return posCode;

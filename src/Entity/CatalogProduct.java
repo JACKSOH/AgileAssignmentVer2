@@ -40,6 +40,13 @@ public class CatalogProduct extends Product{
         this.prodDescription = prodDescription;
         this.prodQuantity = prodQuantity;
     }
+
+    public CatalogProduct(String prodName, String prodType, int prodQuantity, String prodID, double prodPrice) {
+        super(prodID, prodPrice);
+        this.prodName = prodName;
+        this.prodType = prodType;
+        this.prodQuantity = prodQuantity;
+    }
     
     public String getProdName() {
         return prodName;

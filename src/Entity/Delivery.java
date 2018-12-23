@@ -15,17 +15,21 @@ public class Delivery {
     private String deliveryManName;
     private String deliveryDate;
     private String deliveredTime;
-    private String posCode;
+    private String area;
     private String address;
 
-    public Delivery(Order order, String deliveryID, String deliveryManName, String deliveryDate, String deliveredTime, String posCode, String address) {
+    public Delivery(Order order, String deliveryID, String deliveryManName, String deliveryDate, String deliveredTime, String area, String address) {
         this.order = order;
         this.deliveryID = deliveryID;
         this.deliveryManName = deliveryManName;
         this.deliveryDate = deliveryDate;
         this.deliveredTime = deliveredTime;
-        this.posCode = posCode;
+        this.area = area;
         this.address = address;
+    }
+
+    public Delivery(String deliveryID) {
+        this.deliveryID = deliveryID;
     }
 
     
@@ -76,13 +80,15 @@ public class Delivery {
         this.deliveryManName = deliveryManName;
     }
 
-    public String getPosCode() {
-        return posCode;
+    public String getArea() {
+        return area;
     }
 
-    public void setPosCode(String posCode) {
-        this.posCode = posCode;
+    public void setArea(String area) {
+        this.area = area;
     }
+
+   
 
    
 
@@ -96,8 +102,10 @@ public class Delivery {
 
     @Override
     public String toString() {
-        return "Delivery{" + "order=" + order + ", deliveryID=" + deliveryID + ", deliveryManName=" + deliveryManName + ", deliveryDate=" + deliveryDate + ", deliveredTime=" + deliveredTime + ", posCode=" + posCode + ", address=" + address + '}';
+        return "Delivery{" + "order=" + order + ", deliveryID=" + deliveryID + ", deliveryManName=" + deliveryManName + ", deliveryDate=" + deliveryDate + ", deliveredTime=" + deliveredTime + ", area=" + area + ", address=" + address + '}';
     }
+
+   
 
     
     

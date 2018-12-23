@@ -9,7 +9,7 @@ package UI;
 import Entity.*;
 
 import ADT.*;
-import static UI.Homepage.allCatProdList;
+//import static UI.Homepage.allCatProdList;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -37,7 +37,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
        private QueueInterface<String> flexiLine=new LinkedQueue<String>();
        
        static ListInterface<CatalogProduct> allCatProdList = new LList<>();
-    static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
+    static ListInterface<CustomizeProduct> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
     static ListInterface<OrderList> allOrderList = new LList<>();
     static ListInterface<ConsumerE> allConsumerList = new LList<>();
@@ -75,7 +75,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
         
         //jButton1.addActionListener(new AddListener());
     }
-     public CustomizedFloral(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizedFloral> allCustProdList ,ListInterface<Order> allSalesOrderList ,
+     public CustomizedFloral(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizeProduct> allCustProdList ,ListInterface<Order> allSalesOrderList ,
          ListInterface<OrderList> allOrderList ,ListInterface<ConsumerE> allConsumerList ,ListInterface<CooperateE> allCoopList ,
          ListInterface<Delivery> allDeliveryList ,ListInterface<Pickup> allPickupList,ListInterface<Invoice> allInvoiceList){
              this.allCatProdList=allCatProdList;
@@ -103,26 +103,30 @@ public class CustomizedFloral extends javax.swing.JFrame {
        title.setText("Step 1 : Choose your floral style and size");
          }
     public void init(){
-        CatalogProduct f1=new CatalogProduct("CP0001","Roses","flower","Available","hehe",12);
-        CatalogProduct f2=new CatalogProduct("CP0002","Sunflower","flower","Out of stock","haha",14);
-        CatalogProduct f3=new CatalogProduct("CP0003","hahaha","Accessories","Out of stock","haha",14);
+        CatalogProduct f1=new CatalogProduct("Roses","flower","Available","hehe",10,"CP0001",13);
+        CatalogProduct f2=new CatalogProduct("Sunflower","flower","Out of stock","haha",4,"CP0002",14);
+        CatalogProduct f3=new CatalogProduct("hahaha","Accessories","Out of stock","haha",2,"CP0003",14);
         productList.add(f1);
         productList.add(f2);
         productList.add(f3);
         
-        Order order1=new Order("OR0001","Confirm");
-        Order order2=new Order("OR0002","Confirm");
-        Order order3=new Order("OR0003","Confirm");
-        orderList.add(order1);
-        orderList.add(order2);
-        orderList.add(order3);
         
-        CustomizeProduct cp = new CustomizeProduct("CFA0001","abc","abd","Express",order1);
-        CustomizeProduct cp1 = new CustomizeProduct("CFA0001","abc","abd","Normal",order2);
-        floralList.add(cp1);
-        floralList.add(cp);
+        Order order1=new Order("OR0001","Confirm","Customized Floral",100.00);
+        Order order2=new Order("OR0002","Confirm","Customized Floral",120.00);
+        Order order3=new Order("OR0003","Confirm","Customized Floral",140.00);
+        allSalesOrderList.add(order1);
+        allSalesOrderList.add(order2);
+        allSalesOrderList.add(order3);
         
         
+        
+        CustomizeProduct cp = new CustomizeProduct("Triangle","Large","Express",order1,"CFA0001",100);
+        CustomizeProduct cp1 = new CustomizeProduct("Backet","Small","Normal",order2,"CFA0001",120);
+        allCustProdList.add(cp1);
+        allCustProdList.add(cp);
+        
+        OrderList orderlist1 = new OrderList(cp,order1,"OL001","1");
+        allOrderList.add(orderlist1);
         
         
         
@@ -836,12 +840,10 @@ public class CustomizedFloral extends javax.swing.JFrame {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
-        cfaCode++;
+        
         String custProdID = "CFA"+String.format("%04d", cfaCode);
-        Order order1=new Order("OR0006","Confirm");
-        allSalesOrderList.add(order1);
-        CustomizeProduct cf = new CustomizeProduct(custProdID,style.getSelectedItem().toString(),size.getSelectedItem().toString(),priority.getSelectedItem().toString(),order1);
-        floralList.add(cf);
+        Order order1=new Order("OR0006","Confirm","Customize Floral",0);
+        CustomizeProduct cf = new CustomizeProduct(style.getSelectedItem().toString(),size.getSelectedItem().toString(),priority.getSelectedItem().toString(),order1,custProdID,0);
         
         double totalFlowerPrice=0;
         for(int i=0;i<jTable1.getSelectedRowCount();i++){
@@ -880,6 +882,11 @@ public class CustomizedFloral extends javax.swing.JFrame {
         totalPrice = totalAcPrice+totalFlowerPrice+priorityprice+sizeprice+styleprice;
         int a = JOptionPane.showConfirmDialog(null,"Are you sure want to add this order?","Yes Or No",JOptionPane.YES_NO_OPTION);
         if(a==JOptionPane.YES_OPTION){
+            Order order12=new Order(GenerateNextORID(),"Confirm","Customize Floral",totalPrice);
+            allSalesOrderList.add(order12);
+            CustomizeProduct cf1 = new CustomizeProduct(style.getSelectedItem().toString(),size.getSelectedItem().toString(),priority.getSelectedItem().toString(),order12,GenerateNextCPID(),totalPrice);
+            allCustProdList.add(cf1);
+            OrderList o = new OrderList(cf1,order12,GenerateNextOLID(),"1");
             jPanel6.setVisible(false);
             jPanel9.setVisible(true);
             jButton5.setVisible(true);
@@ -891,8 +898,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
             
             
             for(int i = 0;i<flowerList.getNumberOfEntries();i++){
-                String fcustid=flowerList.getEntry(i+1).getCp().getCustProdID().toString();
-                if(fcustid.equals(cf.getCustProdID())){
+                String fcustid=flowerList.getEntry(i+1).getCp().getProdID().toString();
+                if(fcustid.equals(cf.getProdID())){
                    // fList=fList+"\n-"+flowerList.getEntry(i+1).getFlowerName().toString();
                     //fPrice = fPrice+"\nRM"+flowerList.getEntry(i+1).getPrice();
                     fList+="\n-"+flowerList.getEntry(i+1).getFlowerName().toString()+"\t\tRM"+flowerList.getEntry(i+1).getPrice();
@@ -904,8 +911,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
             
            // jTextArea2.setText("Price\n============\n\n"+fPrice);
             for(int i = 0;i<acList.getNumberOfEntries();i++){
-                String fcustid=acList.getEntry(i+1).getCp().getCustProdID().toString();
-                if(fcustid.equals(cf.getCustProdID())){
+                String fcustid=acList.getEntry(i+1).getCp().getProdID().toString();
+                if(fcustid.equals(cf.getProdID())){
                     fList=fList+"\n\nAccessories\n-"+acList.getEntry(i+1).getAcName().toString()+"\t\tRM"+acList.getEntry(i+1).getPrice();
                     
                     
@@ -962,6 +969,60 @@ public class CustomizedFloral extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    public String GenerateNextORID(){
+        String newID ="";
+         if(!allSalesOrderList.isEmpty()){
+          int lastOrderItemIndex = allSalesOrderList.getNumberOfEntries();
+          //update the last orderListID
+          String lastOrderListID = allSalesOrderList.getEntry(lastOrderItemIndex).getOrderID();
+          String prefix =lastOrderListID.substring(0, 2);
+          int integer = Integer.parseInt(lastOrderListID.substring(2,6));
+          integer +=1;
+          
+          newID=prefix+String.format("%04d", integer);
+        }else{
+            newID="OR0001";
+        }
+        return newID;
+    }
+    public String GenerateNextOLID(){
+        // read the last item and add to next
+        String newID="";
+        if(!allOrderList.isEmpty()){
+          int lastOrderItemIndex = allOrderList.getNumberOfEntries();
+          //update the last orderListID
+          String lastOrderListID = allOrderList.getEntry(lastOrderItemIndex).getOLID();
+          String prefix =lastOrderListID.substring(0, 2);
+          int integer = Integer.parseInt(lastOrderListID.substring(2,6));
+          integer +=1;
+          
+          newID=prefix+String.format("%04d", integer);
+        }else{
+            newID="OL0001";
+        }
+          
+     return newID;
+          
+    }
+    public String GenerateNextCPID(){
+        // read the last item and add to next
+        String newID="";
+        if(!allCustProdList.isEmpty()){
+          int lastOrderItemIndex = allCustProdList.getNumberOfEntries();
+          //update the last orderListID
+          String lastOrderListID = allCustProdList.getEntry(lastOrderItemIndex).getProdID();
+          String prefix =lastOrderListID.substring(0, 2);
+          int integer = Integer.parseInt(lastOrderListID.substring(2,6));
+          integer +=1;
+          
+          newID=prefix+String.format("%04d", integer);
+        }else{
+            newID="OL0001";
+        }
+          
+     return newID;
+          
+    }
     /**
      * @param args the command line arguments
      */

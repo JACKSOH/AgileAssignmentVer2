@@ -33,6 +33,16 @@ public class OrderList {
         this.quantity = quantity;       
     }
 
+    public OrderList(CustomizeProduct customizeProduct, Order order, String OLID, String quantity) {
+        this.customizeProduct = customizeProduct;
+        this.order = order;
+        this.OLID = OLID;
+        this.quantity = quantity;
+    }
+
+    
+    
+
     public OrderList(CatalogProduct catalogProduct, CustomizeProduct customizeProduct, Order order, String OLID, String prodID, String quantity, String orderID) {
         this.catalogProduct = catalogProduct;
         this.customizeProduct = customizeProduct;

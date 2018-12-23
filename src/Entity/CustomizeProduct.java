@@ -14,6 +14,7 @@ public class CustomizeProduct extends Product{
     private String style;
     private String size;
     private String priority;
+    private Order order;
     
     
     public CustomizeProduct() {
@@ -26,11 +27,20 @@ public class CustomizeProduct extends Product{
         this.priority = priority;
     }
 
-    public CustomizeProduct(String style, String size, String priority, String prodID, double prodPrice) {
+    public CustomizeProduct(String style, String size, String priority,Order order, String prodID, double prodPrice) {
         super(prodID, prodPrice);
         this.style = style;
         this.size = size;
         this.priority = priority;
+        this.order=order;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
    

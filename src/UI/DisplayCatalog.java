@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DisplayCatalog extends javax.swing.JFrame {
      static ListInterface<CatalogProduct> allCatProdList = new LList<>();
-    static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
+    static ListInterface<CustomizeProduct> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
     static ListInterface<OrderList> allOrderList = new LList<>();
     static ListInterface<ConsumerE> allConsumerList = new LList<>();
@@ -35,11 +35,10 @@ public class DisplayCatalog extends javax.swing.JFrame {
  ListInterface<CatalogProduct> prodList = new LList();
  ListInterface<OrderList> orderList = new LList();
  ListInterface<Order> salesOrderList = new LList<>();
- ListInterface<ConsumerOrder> consumerOrderList = new LList<>();
+
  ListInterface<OrderList> selectOrderList = new LList<>();
  double totalAmt=0.00;
- Order consumerOrder = new ConsumerOrder();
- Order cooperateOrder = new CooperateOrder();
+
  Order order = new Order();
  String orderID="";
     /**
@@ -49,7 +48,7 @@ public class DisplayCatalog extends javax.swing.JFrame {
         initComponents();
         initialize();
     }
-     public DisplayCatalog(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizedFloral> allCustProdList ,ListInterface<Order> allSalesOrderList ,
+     public DisplayCatalog(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizeProduct> allCustProdList ,ListInterface<Order> allSalesOrderList ,
          ListInterface<OrderList> allOrderList ,ListInterface<ConsumerE> allConsumerList ,ListInterface<CooperateE> allCoopList ,
          ListInterface<Delivery> allDeliveryList ,ListInterface<Pickup> allPickupList,ListInterface<Invoice> allInvoiceList){
          this.allCatProdList=allCatProdList;
@@ -66,7 +65,7 @@ public class DisplayCatalog extends javax.swing.JFrame {
             initialize();
             
     }
-    public DisplayCatalog(Order order1, ListInterface<OrderList> confirmOrderList,ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizedFloral> allCustProdList ,ListInterface<Order> allSalesOrderList ,
+    public DisplayCatalog(Order order1, ListInterface<OrderList> confirmOrderList,ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizeProduct> allCustProdList ,ListInterface<Order> allSalesOrderList ,
          ListInterface<OrderList> allOrderList ,ListInterface<ConsumerE> allConsumerList ,ListInterface<CooperateE> allCoopList ,
          ListInterface<Delivery> allDeliveryList ,ListInterface<Pickup> allPickupList,ListInterface<Invoice> allInvoiceList){
      //class for receive from catalog order.
@@ -169,17 +168,21 @@ public void initialize(){
         errorMsg.setVisible(false);
       
        // current order ini
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        /*DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
        for(int i=0;i<orderList.getNumberOfEntries();i++){
            for(int j=0;j<prodList.getNumberOfEntries();j++){
             //   System.out.println(prodList.getEntry(j+1).getProdName());
             
                if(orderList.getEntry(i+1).getCatalogProduct().getProdID().equals(prodList.getEntry(j+1).getProdID())){
                    model.addRow(new Object[]{prodList.getEntry(j+1).getProdName(),orderList.getEntry(i+1).getQuantity()});
-           }
+               
+               }
+//           }else if(orderList.getEntry(i+1).getCustomizeProduct().getProdID().equals(allCustProdList.getEntry(j+1).getProdID())){
+//               model.addRow(new Object[]{allCustProdList.getEntry(j+1).getProdID(),orderList.getEntry(i+1).getQuantity()});
+//           }
            
        }
-       }
+       }*/
         refreshOrderTable();
         refreshSalesOrderTable();
      jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -833,6 +836,10 @@ public void initialize(){
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DisplayCatalog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

@@ -26,7 +26,7 @@ public class Homepage extends javax.swing.JFrame {
 
    
        static ListInterface<CatalogProduct> allCatProdList = new LList<>();
-    static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
+    static ListInterface<CustomizeProduct> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
     static ListInterface<OrderList> allOrderList = new LList<>();
     static ListInterface<ConsumerE> allConsumerList = new LList<>();
@@ -42,7 +42,7 @@ public class Homepage extends javax.swing.JFrame {
         
         //jButton1.addActionListener(new AddListener());
     }
-    public Homepage(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizedFloral> allCustProdList ,ListInterface<Order> allSalesOrderList ,
+    public Homepage(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizeProduct> allCustProdList ,ListInterface<Order> allSalesOrderList ,
          ListInterface<OrderList> allOrderList ,ListInterface<ConsumerE> allConsumerList ,ListInterface<CooperateE> allCoopList ,
          ListInterface<Delivery> allDeliveryList ,ListInterface<Pickup> allPickupList,ListInterface<Invoice> allInvoiceList){
              this.allCatProdList=allCatProdList;
@@ -64,18 +64,18 @@ public class Homepage extends javax.swing.JFrame {
              //init catalog product list
          
         
-        allCatProdList.add(new CatalogProduct("CP001","Just For You","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",120.00));
-     allCatProdList.add(new CatalogProduct("CP002","True Romance","Floral arrangement","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",120.00));
-      allCatProdList.add(new CatalogProduct("CP003","Teddy Red","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",120.00));
-       allCatProdList.add(new CatalogProduct("CP004","Queen","Floral arrangement","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",120.00));
-        allCatProdList.add(new CatalogProduct("CP005","Pink Delight","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",100.00));
-         allCatProdList.add(new CatalogProduct("CP006","Lily Love","Bouquet","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",100.00));
-          allCatProdList.add(new CatalogProduct("CP007","Princess","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",100.00));
-           allCatProdList.add(new CatalogProduct("CP008","Montrex Tulips","Bouquet","Available","Include red tulips, yellow tulips, purple tulips.",100.00));
-            allCatProdList.add(new CatalogProduct("CP009","Purple Tulips","Bouquet","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",100.00));
-             allCatProdList.add(new CatalogProduct("CP010","Over The Rainbow","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",100.00));
-              allCatProdList.add(new CatalogProduct("CP011","Sweet Admiration","Floral arrangement","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",100.00));
-              allCatProdList.add(new CatalogProduct("CP012","Ribbon","Accessories","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",100.00));
+        allCatProdList.add(new CatalogProduct("Just For You","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",11,"CP001",120.00));
+     allCatProdList.add(new CatalogProduct("True Romance","Floral arrangement","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",12,"CP002",120.00));
+      allCatProdList.add(new CatalogProduct("Teddy Red","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",13,"CP003",120.00));
+       allCatProdList.add(new CatalogProduct("Queen","Floral arrangement","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",14,"CP004",120.00));
+        allCatProdList.add(new CatalogProduct("Pink Delight","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",15,"CP005",100.00));
+         allCatProdList.add(new CatalogProduct("Lily Love","Bouquet","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",16,"CP006",100.00));
+          allCatProdList.add(new CatalogProduct("Princess","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",17,"CP007",100.00));
+           allCatProdList.add(new CatalogProduct("Montrex Tulips","Bouquet","Available","Include red tulips, yellow tulips, purple tulips.",18,"CP008",100.00));
+            allCatProdList.add(new CatalogProduct("Purple Tulips","Bouquet","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",19,"CP009",100.00));
+             allCatProdList.add(new CatalogProduct("Over The Rainbow","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",30,"CP010",100.00));
+              allCatProdList.add(new CatalogProduct("Sweet Admiration","Floral arrangement","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",15,"CP011",100.00));
+              allCatProdList.add(new CatalogProduct("Ribbon","Accessories","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",20,"CP012",100.00));
         
         //initialize invoice list
         
@@ -84,9 +84,9 @@ public class Homepage extends javax.swing.JFrame {
         //initiazize pickup list
         
         //initialize cooperate list
-        allCoopList.add(new CooperateE("CP1000","Meow Sdn Bd","017-9996666",1000.00,"Jalan Tak tau"));
-        allCoopList.add(new CooperateE("CP1001","Wang Sdn Bd","017-3366666",2000.00,"Jalan Tak tau2"));
-        allCoopList.add(new CooperateE("CP1002","Oh yeah Sdn Bd","017-5554444",1500.00,"Jalan Tak tau3"));
+        allCoopList.add(new CooperateE(1000.00,0,"CP1000","Meow Sdn Bd","017-9996666","53300","Jalan Tak tau"));
+        allCoopList.add(new CooperateE(2000.00,1,"CP1001","Wang Sdn Bd","017-3366666","53400","Jalan Tak tau2"));
+        allCoopList.add(new CooperateE(1500.00,2,"CP1002","Oh yeah Sdn Bd","017-5554444","53500","Jalan Tak tau3"));
          }
     
     @SuppressWarnings("unchecked")
@@ -287,7 +287,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_OrderPickupActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     new InvoiceReport(allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
+     //new InvoiceReport(allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
      this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

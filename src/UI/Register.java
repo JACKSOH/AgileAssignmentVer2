@@ -8,6 +8,8 @@ import Entity.*;
 import ADT.ListInterface;
 import ADT.LList;
 import java.util.regex.Pattern;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class Register extends javax.swing.JFrame {
     static ListInterface<CatalogProduct> allCatProdList = new LList<>();
-    static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
+    static ListInterface<CustomizeProduct> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
     static ListInterface<OrderList> allOrderList = new LList<>();
     static ListInterface<ConsumerE> allConsumerList = new LList<>();
@@ -30,16 +32,19 @@ public class Register extends javax.swing.JFrame {
      */
       private ListInterface<ConsumerE> custList = new LList<>();
       private ListInterface<CooperateE> cooList = new LList<>();
-      
+      ButtonGroup bgroup = new ButtonGroup();
+        
         
      
     public Register() {
         initComponents();
-       
+        bgroup.add(Male);
+        bgroup.add(Female);
+        Male.setSelected(true);
         custID.setText("CO"+ConsumerE.getNextNumber());
         cooID.setText("CP"+CooperateE.getNextNumber());
     }
-public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizedFloral> allCustProdList ,ListInterface<Order> allSalesOrderList ,
+public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizeProduct> allCustProdList ,ListInterface<Order> allSalesOrderList ,
          ListInterface<OrderList> allOrderList ,ListInterface<ConsumerE> allConsumerList ,ListInterface<CooperateE> allCoopList ,
          ListInterface<Delivery> allDeliveryList ,ListInterface<Pickup> allPickupList,ListInterface<Invoice> allInvoiceList){
      this.allCatProdList=allCatProdList;
@@ -82,6 +87,11 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
         jScrollPane1 = new javax.swing.JScrollPane();
         custAddress = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        Male = new javax.swing.JRadioButton();
+        Female = new javax.swing.JRadioButton();
+        label10 = new java.awt.Label();
+        label11 = new java.awt.Label();
+        PostCo = new java.awt.TextField();
         jPanel11 = new javax.swing.JPanel();
         label5 = new java.awt.Label();
         cooContact = new javax.swing.JTextField();
@@ -95,9 +105,10 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
         jButton4 = new javax.swing.JButton();
         label9 = new java.awt.Label();
         cooLimit = new javax.swing.JTextField();
+        label12 = new java.awt.Label();
+        postCo = new java.awt.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(852, 683));
 
         jPanel2.setBackground(new java.awt.Color(122, 72, 221));
         jPanel2.setPreferredSize(new java.awt.Dimension(738, 238));
@@ -184,26 +195,57 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
             }
         });
 
+        Male.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Male.setText("Male");
+        Male.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaleActionPerformed(evt);
+            }
+        });
+
+        Female.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Female.setText("Female");
+
+        label10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label10.setText("Gender");
+
+        label11.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label11.setText("PostCode");
+
+        PostCo.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(custID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(custContact)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(custName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(custID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(custContact)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(custName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(PostCo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel8Layout.createSequentialGroup()
+                                    .addComponent(Male)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                    .addComponent(Female)))))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addComponent(jButton1)))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,13 +262,23 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(custContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Male)
+                        .addComponent(Female))
+                    .addComponent(label10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(label11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PostCo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consumer", jPanel8);
@@ -281,6 +333,11 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
 
         cooLimit.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
+        label12.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label12.setText("PostCode");
+
+        postCo.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -288,15 +345,6 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cooLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4)))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,8 +358,20 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cooID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cooName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cooName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4)
+                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(postCo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cooLimit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,13 +395,17 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cooLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(label12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postCo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cooperate", jPanel11);
@@ -384,27 +448,58 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
         else if(custContact.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Please insert consumer contact number", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        else if(!(Pattern.matches("^(\\+?6?01)[1|2|3|4|6|7|8|9]\\-*[1-9]{7,8}",custContact.getText()))){
+         else if(!(Pattern.matches("^(\\+?6?01)[1|2|3|4|6|7|8|9]\\-*[1-9]{7,8}",custContact.getText()))){
             JOptionPane.showMessageDialog(null,"Please follow phone format xxx-xxxxxxxxx", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(PostCo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please insert address postcode", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(!(Pattern.matches("^*[0-9]{5}", PostCo.getText()))){
+             JOptionPane.showMessageDialog(null,"Please follow Malaysia PostCode Format xxxxx", "Error",JOptionPane.ERROR_MESSAGE);
         }
          else if(custAddress.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Please insert consumer address", "Error", JOptionPane.ERROR_MESSAGE);
-           
         }
+        
          else{
-            ans = JOptionPane.showConfirmDialog(null,"ID :"+custID.getText()+"\nName :"+custName.getText()+"\nContact Number :"+custContact.getText()+"\nAddress :"+custAddress.getText(),"Confirmation",JOptionPane.YES_NO_OPTION);
-            if(ans ==JOptionPane.YES_OPTION){
-                ConsumerE cons=new ConsumerE(custID.getText(),custName.getText(),custContact.getText(),custAddress.getText());
-                custList.add(cons);
-                JOptionPane.showMessageDialog(null, "Success Create a consumer");
-                System.out.println(cons.toString());
+            
+                if(Female.isSelected()==true){
+                    ans = JOptionPane.showConfirmDialog(null,"ID :"+custID.getText()+"\nName :"+custName.getText()+"\nContact Number :"+custContact.getText()+"\nGender :Female"+"\nPostCode:"+PostCo.getText()+"\nAddress :"+custAddress.getText(),"Confirmation",JOptionPane.YES_NO_OPTION);
+                    if(ans ==JOptionPane.YES_OPTION){
+                      ConsumerE cons=new ConsumerE("Female",custID.getText(),custName.getText(),custContact.getText(),PostCo.getText(),custAddress.getText());
+ 
+                        custList.add(cons);
+                        JOptionPane.showMessageDialog(null, "Success Create a consumer");
+                        System.out.println(cons.toString());
+                        custID.setText("CO"+ConsumerE.getNextNumber());
+                        custContact.setText("");
+                        custName.setText("");
+                        Male.setSelected(true);
+                        PostCo.setText("");
+                        custAddress.setText("");
+                }
+                }
+               else if(Male.isSelected()==true){
+                   ans = JOptionPane.showConfirmDialog(null,"ID :"+custID.getText()+"\nName :"+custName.getText()+"\nContact Number :"+custContact.getText()+"\nGender :Male"+"\nPostCode:"+PostCo.getText()+"\nAddress :"+custAddress.getText(),"Confirmation",JOptionPane.YES_NO_OPTION);
+                    if(ans ==JOptionPane.YES_OPTION){
+                     ConsumerE cons=new ConsumerE("Male",custID.getText(),custName.getText(),custContact.getText(),PostCo.getText(),custAddress.getText());
                 
-                custID.setText("CO"+ConsumerE.getNextNumber());
-                custContact.setText("");
-                custName.setText("");
-                custAddress.setText("");
+                        custList.add(cons);
+                        JOptionPane.showMessageDialog(null, "Success Create a consumer");
+                        System.out.println(cons.toString());
+                         custID.setText("CO"+ConsumerE.getNextNumber());
+                        custContact.setText("");
+                        custName.setText("");
+                        Male.setSelected(true);
+                        PostCo.setText("");
+                        custAddress.setText("");
+                
+                }
+                 
+               } 
+               
             }
-         }
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void custIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custIDActionPerformed
@@ -447,14 +542,20 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
         else if(cooLimit.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Please insert the Monthly credit limit", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        else if(postCo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please insert address postcode", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(!(Pattern.matches("^*[0-9]{5}", postCo.getText()))){
+             JOptionPane.showMessageDialog(null,"Please follow Malaysia PostCode Format xxxxx", "Error",JOptionPane.ERROR_MESSAGE);
+        }
         else if(cooAddress.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Please insert cooperate customer address", "Error", JOptionPane.ERROR_MESSAGE);
         }
         else{
-            ans = JOptionPane.showConfirmDialog(null,"ID :"+cooID.getText()+"\nCompany Name :"+cooName.getText()+"\nContact Number :"+cooContact.getText()+"\nMonthly Credit Limit :RM"+cooLimit.getText()+"\nAddress :"+cooAddress.getText(),"Confirmation",JOptionPane.YES_NO_OPTION);
+            ans = JOptionPane.showConfirmDialog(null,"ID :"+cooID.getText()+"\nCompany Name :"+cooName.getText()+"\nContact Number :"+cooContact.getText()+"\nMonthly Credit Limit :RM"+cooLimit.getText()+"\nPostCode:"+postCo.getText()+"\nAddress :"+cooAddress.getText(),"Confirmation",JOptionPane.YES_NO_OPTION);
             if(ans ==JOptionPane.YES_OPTION){
                 double limit=Double.parseDouble(cooLimit.getText());
-                CooperateE coo=new CooperateE(cooID.getText(),cooName.getText(),cooContact.getText(),limit,cooAddress.getText());
+                CooperateE coo=new CooperateE(limit,cooID.getText(),cooName.getText(),cooContact.getText(),postCo.getText(),cooAddress.getText());
                 cooList.add(coo);
                 JOptionPane.showMessageDialog(null, "Success Create a Cooperate Customer");
 
@@ -464,6 +565,7 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
                 cooContact.setText("");
                 cooName.setText("");
                 cooLimit.setText("");
+                postCo.setText("");
                 cooAddress.setText("");
             }
         }
@@ -471,11 +573,15 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        allConsumerList=custList;
-        allCoopList=cooList;
+//        allConsumerList=custList;
+//        allCoopList=cooList;
         new Homepage(allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void MaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -506,6 +612,10 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -516,6 +626,9 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Female;
+    private javax.swing.JRadioButton Male;
+    private java.awt.TextField PostCo;
     private javax.swing.JTextArea cooAddress;
     private javax.swing.JTextField cooContact;
     private javax.swing.JTextField cooID;
@@ -536,6 +649,9 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private java.awt.Label label1;
+    private java.awt.Label label10;
+    private java.awt.Label label11;
+    private java.awt.Label label12;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
@@ -544,5 +660,6 @@ public Register(ListInterface<CatalogProduct> allCatProdList ,ListInterface<Cust
     private java.awt.Label label7;
     private java.awt.Label label8;
     private java.awt.Label label9;
+    private java.awt.TextField postCo;
     // End of variables declaration//GEN-END:variables
 }

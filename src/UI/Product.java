@@ -7,15 +7,8 @@ package UI;
 
 import ADT.LList;
 import ADT.ListInterface;
-import Entity.CatalogProduct;
-import Entity.ConsumerE;
-import Entity.CooperateE;
-import Entity.Delivery;
-import Entity.Invoice;
-import Entity.Order;
-import Entity.OrderList;
-import Entity.Pickup;
-import Entity.Promotion;
+import Entity.*;
+import UI.CustomizedFloral;
 import static UI.CustomizedFloral.allCatProdList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -27,8 +20,8 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class Product extends javax.swing.JFrame {
- static ListInterface<CatalogProduct> allCatProdList = new LList<>();
-    static ListInterface<CustomizedFloral> allCustProdList = new LList<>();
+    static ListInterface<CatalogProduct> allCatProdList = new LList<>();
+    static ListInterface<CustomizeProduct> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
     static ListInterface<OrderList> allOrderList = new LList<>();
     static ListInterface<ConsumerE> allConsumerList = new LList<>();
@@ -48,7 +41,7 @@ public class Product extends javax.swing.JFrame {
         initComponents();
         initialize();
     }
-     public Product(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizedFloral> allCustProdList ,ListInterface<Order> allSalesOrderList ,
+     public Product(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizeProduct> allCustProdList ,ListInterface<Order> allSalesOrderList ,
          ListInterface<OrderList> allOrderList ,ListInterface<ConsumerE> allConsumerList ,ListInterface<CooperateE> allCoopList ,
          ListInterface<Delivery> allDeliveryList ,ListInterface<Pickup> allPickupList,ListInterface<Invoice> allInvoiceList){
              this.allCatProdList=allCatProdList;
@@ -635,6 +628,7 @@ public class Product extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     public void initialize(){
         //add dummy flower data
           productList=allCatProdList;
@@ -696,9 +690,6 @@ public class Product extends javax.swing.JFrame {
         }
     }
     
-    public void refreshTable(){
-    }
-    
     private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
@@ -745,7 +736,7 @@ public class Product extends javax.swing.JFrame {
         int quantity = Integer.parseInt(Quantity.getText());
         double price = Double.parseDouble(Price.getText());
         String description = fDescription.getText();
-        CatalogProduct flower = new CatalogProduct(GenerateNextFLID(),name,type,Status(),description,price,quantity);
+        CatalogProduct flower = new CatalogProduct(name,type,Status(),description,quantity,GenerateNextFLID(),price);
         productList.add(flower);
         System.out.println(productList);      
             Image.setIcon(null);
@@ -803,8 +794,7 @@ public class Product extends javax.swing.JFrame {
                 productList.getEntry(i+1).setProdType(uType.getText());
                 productList.getEntry(i+1).setProdPrice(Double.parseDouble(uPrice.getText()));
                 productList.getEntry(i+1).setProdQuantity(Integer.parseInt(uQuantity.getText()));
-                productList.getEntry(i+1).setProdDescription(uDescription.getText());
-                
+                productList.getEntry(i+1).setProdDescription(uDescription.getText());    
             }
         }
         JOptionPane.showMessageDialog(null, "Updated successful","Information", JOptionPane.INFORMATION_MESSAGE);
