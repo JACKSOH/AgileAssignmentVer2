@@ -635,7 +635,7 @@ public class Product extends javax.swing.JFrame {
         CatalogProduct flower = new CatalogProduct(name,type,Status(),description,quantity,GenerateNextFLID(),price);
         productList.add(flower);
         System.out.println(productList);      
-            Image.setIcon(null);
+            
             fName.setText("");
             Type.setText("");
             Quantity.setText("");
@@ -659,7 +659,7 @@ public class Product extends javax.swing.JFrame {
         }
         else if(z == 1){
             JOptionPane.showMessageDialog(null, "Create cancel","Information", JOptionPane.INFORMATION_MESSAGE);
-            Image.setIcon(null);
+           
             fName.setText("");
             Type.setText("");
             Quantity.setText("");
@@ -694,7 +694,7 @@ public class Product extends javax.swing.JFrame {
             }
         }
         JOptionPane.showMessageDialog(null, "Updated successful","Information", JOptionPane.INFORMATION_MESSAGE);
-        uImage.setIcon(null);
+       
         uStatus.setText("");
         uName.setSelectedItem("");
         uType.setText("");
@@ -706,7 +706,7 @@ public class Product extends javax.swing.JFrame {
         }
         else if(s==1){
         JOptionPane.showMessageDialog(null,"Update cancel","Information",JOptionPane.INFORMATION_MESSAGE);}
-        uImage.setIcon(null);
+     
         uStatus.setText("");
         uName.setSelectedItem("");
         uType.setText("");
@@ -720,7 +720,7 @@ public class Product extends javax.swing.JFrame {
         for( int i=0;i<productList.getNumberOfEntries();i++){
             if(uName.getSelectedItem() == productList.getEntry(i+1).getProdName()){   
             ImageIcon imgThisImg = new ImageIcon("\\Users\\User\\Desktop\\Agile-Assignment\\src\\UI\\Image\\Rose.jpeg");
-            uImage.setIcon(imgThisImg);
+           
             uStatus.setText(productList.getEntry(i+1).getProdStatus());
             uType.setText(productList.getEntry(i+1).getProdType());
             uQuantity.setText(productList.getEntry(i+1).getProdQuantity()+"");
@@ -734,7 +734,7 @@ public class Product extends javax.swing.JFrame {
         for( int i=0;i<productList.getNumberOfEntries();i++){
             if(uName.getSelectedItem() == productList.getEntry(i+1).getProdName()){
                 JOptionPane.showMessageDialog(null, "Product record :"+productList.getEntry(i+1).getProdName()+" has been successfully deleted.","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
-                uImage.setIcon(null);
+               
                 productList.remove(i+1);
                 uStatus.setText("");
                 uType.setText("");
@@ -750,7 +750,7 @@ public class Product extends javax.swing.JFrame {
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         uStatus.setText("");
-        uImage.setIcon(null);
+      
         uName.setSelectedItem("");
         uType.setText("");
         uQuantity.setText("");
@@ -759,7 +759,7 @@ public class Product extends javax.swing.JFrame {
     }//GEN-LAST:event_resetActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
-        Image.setIcon(null);
+      
         fName.setText("");
         Type.setText("");
         Quantity.setText("");
