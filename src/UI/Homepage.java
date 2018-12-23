@@ -87,6 +87,11 @@ public class Homepage extends javax.swing.JFrame {
         allCoopList.add(new CooperateE(1000.00,0,"CP1000","Meow Sdn Bd","017-9996666","53300","Jalan Tak tau"));
         allCoopList.add(new CooperateE(2000.00,1,"CP1001","Wang Sdn Bd","017-3366666","53400","Jalan Tak tau2"));
         allCoopList.add(new CooperateE(1500.00,2,"CP1002","Oh yeah Sdn Bd","017-5554444","53500","Jalan Tak tau3"));
+        
+        //add consumer dummy data
+        allConsumerList.add(new ConsumerE("M", "CO1000", "Ah Seng", "017-55667777","53300","Jalan Mao"));
+       allConsumerList.add(new ConsumerE("M", "CO1001", "Ah Beng", "017-33666666","53200","Jalan Hiao"));
+        allConsumerList.add(new ConsumerE("M", "CO1002", "Ah Heng", "017-45454455","53200","Jalan Wu"));
          }
     
     @SuppressWarnings("unchecked")
@@ -287,7 +292,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_OrderPickupActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     //new InvoiceReport(allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
+     new InvoiceReport(allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
      this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

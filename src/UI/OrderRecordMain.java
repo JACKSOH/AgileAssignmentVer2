@@ -65,16 +65,17 @@ public class OrderRecordMain extends javax.swing.JFrame {
         initComponents();
         initialize();
         initialize1();
-        refreshPickupTable();
-        jTable1.setAutoCreateRowSorter(true);
-        jTable3.setAutoCreateRowSorter(true);
+        
     }
 
     public void initialize() {
         pickupList = allPickupList;
         deliveryList = allDeliveryList;
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        refreshPickupTable();
+        jTable1.setAutoCreateRowSorter(true);
+        jTable3.setAutoCreateRowSorter(true);
+        refreshAreaDDL();
     }
 
     public void initialize1() {
@@ -92,21 +93,16 @@ public class OrderRecordMain extends javax.swing.JFrame {
 //        jTable3.getColumnModel().getColumn(2).setPreferredWidth((jTable3.getSize().width) / 70 * 20);
 //        jTable3.getColumnModel().getColumn(3).setPreferredWidth((jTable3.getSize().width) / 60 * 20);
 
-        IDddl.removeAllItems();
-        IDddl.addItem("");
+       
 
         //Hide all except DeliveryID
-        DMddl.setVisible(false);
-        DMlbl.setVisible(false);
+      
         DMddl.addItem("");
-        posCode.setVisible(false);
-        posCodelbl.setVisible(false);
-        confirm.setVisible(false);
+        
+        
         refreshDeliveryTable();
 
-        for (int i = 0; i < deliveryList.getNumberOfEntries(); i++) {
-            IDddl.addItem(deliveryList.getEntry(i + 1).getDeliveryID().toString());
-        }
+     
     }
 
     public void refreshPickupTable() {
@@ -130,10 +126,66 @@ public class OrderRecordMain extends javax.swing.JFrame {
         }
 
         for (int i = 0; i < deliveryList.getNumberOfEntries(); i++) {
-            model.addRow(new Object[]{deliveryList.getEntry(i + 1).getDeliveryID(), deliveryList.getEntry(i + 1).getAddress(), deliveryList.getEntry(i + 1).getDeliveryManName(), deliveryList.getEntry(i + 1).getDeliveredTime()});
+            model.addRow(new Object[]{deliveryList.getEntry(i + 1).getDeliveryID(), deliveryList.getEntry(i + 1).getArea(), deliveryList.getEntry(i + 1).getDeliveryManName(), deliveryList.getEntry(i + 1).getDeliveredTime()});
         }
     }
+    public void refreshAreaDDL() {
+        AreaDDL.removeAllItems();
+        int containsInDDL = 0;
+   for(int i=0;i<deliveryList.getNumberOfEntries();i++){
+        containsInDDL =0;
+        if(AreaDDL.getItemCount()>1){
+            
+            for(int j =0;j<AreaDDL.getItemCount();j++){
+                
+                if(deliveryList.getEntry(i+1).getArea().equals(AreaDDL.getItemAt(j))){
+                 //   System.out.println(prodList.getEntry(i+1).getProdType());
+                    containsInDDL++;
+                }
+            }
+             if(containsInDDL==0){
+                AreaDDL.addItem(deliveryList.getEntry(i+1).getArea());
+            //check if no such item contain in drop down
+            }
+    }else{
+            //System.out.print(prodList.getEntry(i+1).getProdName());
+            AreaDDL.addItem(deliveryList.getEntry(i+1).getArea().toString()); // if no item, add it
+        }
+    }
+    }
 
+    public String getEstimatedTimeMessage(String area){
+     
+      int minPerDelviery=0;
+      int totalMin=0;
+      if(area.toLowerCase()=="setapak"){
+          minPerDelviery =8;
+      }else if(area.toLowerCase()=="kepong"){
+          minPerDelviery=10;
+      }else if(area.toLowerCase()=="subang"){
+          minPerDelviery=15;
+      }else if(area.toLowerCase()=="rawang"){
+          minPerDelviery=10;
+      }else{
+        minPerDelviery=20;
+    }
+      for(int i=0;i<deliveryList.getNumberOfEntries();i++){
+          if(deliveryList.getEntry(i+1).getArea().toLowerCase().equals(area.toLowerCase())){
+              totalMin+=minPerDelviery;
+          }
+      }
+       String timeMessage="Estimated delivery time: "+totalMin+" minutes";
+      return timeMessage;
+    }
+    public void updateDeliveryMan(String deliveryMan,String area){
+        
+        
+        for(int i=0;i<deliveryList.getNumberOfEntries();i++){
+            if(deliveryList.getEntry(i+1).getArea().toLowerCase().equals(area.toLowerCase())){
+                deliveryList.getEntry(i + 1).setDeliveryManName(deliveryMan);
+            }
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -152,13 +204,11 @@ public class OrderRecordMain extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         confirm = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
-        IDlbl = new javax.swing.JLabel();
-        posCodelbl = new javax.swing.JLabel();
-        IDddl = new javax.swing.JComboBox<>();
         jLabel29 = new javax.swing.JLabel();
         DMlbl = new javax.swing.JLabel();
         DMddl = new javax.swing.JComboBox<>();
-        posCode = new javax.swing.JTextField();
+        IDlbl1 = new javax.swing.JLabel();
+        AreaDDL = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -290,11 +340,6 @@ public class OrderRecordMain extends javax.swing.JFrame {
         confirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/icons8_Checked_26px.png"))); // NOI18N
         confirm.setText("Confirm");
         confirm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        confirm.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                confirmjButton1MouseClicked(evt);
-            }
-        });
         confirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmjButton1ActionPerformed(evt);
@@ -311,19 +356,6 @@ public class OrderRecordMain extends javax.swing.JFrame {
             }
         });
 
-        IDlbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        IDlbl.setText("Delivery ID :");
-
-        posCodelbl.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        posCodelbl.setText("Destination PosCode :");
-
-        IDddl.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        IDddl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDddlCtypeActionPerformed(evt);
-            }
-        });
-
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel29.setText("Delivery man & route selection");
 
@@ -337,6 +369,16 @@ public class OrderRecordMain extends javax.swing.JFrame {
             }
         });
 
+        IDlbl1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        IDlbl1.setText("Delivery Area:");
+
+        AreaDDL.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        AreaDDL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AreaDDLCtypeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -345,31 +387,21 @@ public class OrderRecordMain extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(DMlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DMddl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(210, 210, 210))
                     .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(DMlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(IDlbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(IDlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(posCodelbl))
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(210, 210, 210))
-                            .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel15Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(posCode, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel15Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(IDddl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addComponent(DMddl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AreaDDL, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(135, 135, 135)
                 .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,19 +412,15 @@ public class OrderRecordMain extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(58, 58, 58)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IDlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IDddl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(IDlbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AreaDDL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DMlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DMddl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(posCodelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(posCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -403,7 +431,9 @@ public class OrderRecordMain extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 9, Short.MAX_VALUE)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,13 +446,14 @@ public class OrderRecordMain extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Order Info");
@@ -463,7 +494,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addGap(39, 39, 39))
         );
@@ -484,9 +515,11 @@ public class OrderRecordMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,67 +538,16 @@ public class OrderRecordMain extends javax.swing.JFrame {
 
     private void confirmjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmjButton1ActionPerformed
 //eksdee
-        Random random = new Random();
-        int Setapak = random.nextInt(25) + 10;
-        int Subang = random.nextInt(45) + 25;
-        int Kepong = random.nextInt(30) + 15;
-        int Rawang = random.nextInt(55) + 30;
-
-        if (IDddl.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Please select Delivery ID !");
-        } else if (DMddl.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Please select Delivery Man !");
-        } else if (posCode.getText().length() == 5 && posCode.getText().toString() != null && !posCode.getText().toString().matches("[0-9]+")) {
-            if (posCode.getText().toString() == "53000" || posCode.getText().toString() == "54000") {
-                System.out.print("Estimated Time Arrival : " + Setapak + "minutes");
-                JOptionPane.showMessageDialog(null, "Destination area : Setapak", "Confirmation", JOptionPane.YES_NO_OPTION);
-            } else if (posCode.getText().toString() == "40150" || posCode.getText().toString() == "47500") {
-                System.out.print("Estimated Time Arrival : " + Subang + "minutes");
-                JOptionPane.showMessageDialog(null, "Destination area : Subang", "Confirmation", JOptionPane.YES_NO_OPTION);
-            } else if (posCode.getText().toString() == "51200" || posCode.getText().toString() == "52200") {
-                System.out.print("Estimated Time Arrival : " + Kepong + "minutes");
-                JOptionPane.showMessageDialog(null, "Destination area : Kepong", "Confirmation", JOptionPane.YES_NO_OPTION);
-            } else if (posCode.getText().toString() == "47000" || posCode.getText().toString() == "48000") {
-                System.out.print("Estimated Time Arrival : " + Rawang + "minutes");
-                JOptionPane.showMessageDialog(null, "Destination area : Rawang", "Error", JOptionPane.YES_NO_OPTION);
-            } else {
-                JOptionPane.showMessageDialog(null, "Not valid Zip Codes entered !");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Post code must be 5 integers", "Error", JOptionPane.YES_NO_OPTION);
-        }
-
-        for (int i = 0; i < deliveryList.getNumberOfEntries(); i++) {
-            System.out.println(deliveryList.getEntry(i + 1).getDeliveryID().equals(IDddl.getSelectedItem().toString()));
-
-            if (deliveryList.getEntry(i + 1).getDeliveryID().equals(IDddl.getSelectedItem().toString())) {
-                deliveryList.getEntry(i + 1).setDeliveryManName(DMddl.getSelectedItem().toString());
-
-                System.out.print(deliveryList.getEntry(i + 1).getAddress());
-
-            }
-
-            System.out.print("ok");
-            JOptionPane.showMessageDialog(null, "Delivery Man Assigned !");
-        }
-
+        String selectedArea = AreaDDL.getSelectedItem().toString();
+        String selectedMan = DMddl.getSelectedItem().toString();
+        updateDeliveryMan(selectedMan, selectedArea);
+        
+    JOptionPane.showMessageDialog(null, "Delivery Man Assigned !\n"+getEstimatedTimeMessage(selectedArea));
         refreshDeliveryTable();
 
-        refreshDeliveryTable();
+        
+    
     }//GEN-LAST:event_confirmjButton1ActionPerformed
-
-    private void confirmjButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmjButton1MouseClicked
-        /* */
-        String DID = "";
-        for (int j = 0; j < deliveryList.getNumberOfEntries(); j++) {
-            if (deliveryList.getEntry(j + 1).getDeliveryManName().equals(DMddl.getSelectedItem().toString())) {
-                DID = deliveryList.getEntry(j + 1).getDeliveryID();
-            }
-
-        }
-        deliveryList.add(new Delivery(DID));
-        refreshDeliveryTable();
-    }//GEN-LAST:event_confirmjButton1MouseClicked
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         int rowSelected = jTable3.getSelectedRow();
@@ -592,24 +574,7 @@ public class OrderRecordMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void DMddlCtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DMddlCtypeActionPerformed
-        DMddl.addItem("");
-        String Dmname = DMddl.getSelectedItem().toString();
-
-        if (Dmname == "Kong") {
-            posCode.setVisible(true);
-            posCodelbl.setVisible(true);
-        } else if (Dmname == "Muhd") {
-            posCode.setVisible(true);
-            posCodelbl.setVisible(true);
-        } else if (Dmname == "Low") {
-            posCode.setVisible(true);
-            posCodelbl.setVisible(true);
-        } else if (Dmname == "Abu") {
-            posCode.setVisible(true);
-            posCodelbl.setVisible(true);
-        }
-
-
+       
     }//GEN-LAST:event_DMddlCtypeActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -620,44 +585,9 @@ public class OrderRecordMain extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void IDddlCtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDddlCtypeActionPerformed
-
-        String D_ID = IDddl.getSelectedItem().toString();
-
-                if (D_ID == "DL0001") {
-                        DMddl.removeAllItems();
-                        DMddl.addItem("Kong");
-                        DMddl.addItem("Muhd");
-                        DMddl.addItem("Low");
-                        DMddl.addItem("Abu");
-                        DMlbl.setVisible(true);
-                        DMddl.setVisible(true);
-                    } else if (D_ID == "DL0002") {
-                        DMddl.removeAllItems();
-                        DMddl.addItem("Kong");
-                        DMddl.addItem("Muhd");
-                        DMddl.addItem("Low");
-                        DMddl.addItem("Abu");
-                        DMlbl.setVisible(true);
-                        DMddl.setVisible(true);
-                    } else if (D_ID == "DL0003") {
-                        DMddl.removeAllItems();
-                        DMddl.addItem("Kong");
-                        DMddl.addItem("Muhd");
-                        DMddl.addItem("Low");
-                        DMddl.addItem("Abu");
-                        DMlbl.setVisible(true);
-                        DMddl.setVisible(true);
-                    } else if (D_ID == "DL0004") {
-                        DMddl.removeAllItems();
-                        DMddl.addItem("Kong");
-                        DMddl.addItem("Muhd");
-                        DMddl.addItem("Low");
-                        DMddl.addItem("Abu");
-                        DMlbl.setVisible(true);
-                        DMddl.setVisible(true);
-                    }
-    }//GEN-LAST:event_IDddlCtypeActionPerformed
+    private void AreaDDLCtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AreaDDLCtypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AreaDDLCtypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -707,10 +637,10 @@ public class OrderRecordMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> AreaDDL;
     private javax.swing.JComboBox<String> DMddl;
     private javax.swing.JLabel DMlbl;
-    private javax.swing.JComboBox<String> IDddl;
-    private javax.swing.JLabel IDlbl;
+    private javax.swing.JLabel IDlbl1;
     private javax.swing.JButton confirm;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton6;
@@ -730,7 +660,5 @@ public class OrderRecordMain extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField posCode;
-    private javax.swing.JLabel posCodelbl;
     // End of variables declaration//GEN-END:variables
 }

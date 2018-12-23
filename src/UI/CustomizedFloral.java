@@ -55,6 +55,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
         int cfaCode=0;
         int acCode=0;
         int flCode=0;
+        String flList="";
+        String accList="";
      
     public CustomizedFloral() {
         
@@ -120,8 +122,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
         
         
         
-        CustomizeProduct cp = new CustomizeProduct("Triangle","Large","Express",order1,"CFA0001",100);
-        CustomizeProduct cp1 = new CustomizeProduct("Backet","Small","Normal",order2,"CFA0001",120);
+        CustomizeProduct cp = new CustomizeProduct("Triangle","Large","Express",order1,"CF0001",100);
+        CustomizeProduct cp1 = new CustomizeProduct("Backet","Small","Normal",order2,"CF0001",120);
         allCustProdList.add(cp1);
         allCustProdList.add(cp);
         
@@ -131,35 +133,34 @@ public class CustomizedFloral extends javax.swing.JFrame {
         
         
         
-        DefaultTableModel jobListTable = (DefaultTableModel) jTable3.getModel();
-        Object[] rowData = new Object[1];
         
         
-        for(int i=0;i<floralList.getNumberOfEntries();i++){
-            String pr=floralList.getEntry(i+1).getPriority();
+       
+        
+        refreshJobTable();
+    }
+   public void refreshJobTable(){ 
+       for(int i=0;i<allCustProdList.getNumberOfEntries();i++){
+            String pr=allCustProdList.getEntry(i+1).getPriority();
             if(pr.equals("Express")){
-                line.enqueue(floralList.getEntry(i+1).getOrder().getOrderID());
+                line.enqueue(allCustProdList.getEntry(i+1).getOrder().getOrderID());
                 
              
                 
             }
             
             if(pr.equals("Normal")){
-                normalLine.enqueue(floralList.getEntry(i+1).getOrder().getOrderID());
+                normalLine.enqueue(allCustProdList.getEntry(i+1).getOrder().getOrderID());
   
             }
             
             if(pr.equals("Flexi")){
-                flexiLine.enqueue(floralList.getEntry(i+1).getOrder().getOrderID());
+                flexiLine.enqueue(allCustProdList.getEntry(i+1).getOrder().getOrderID());
             }
             
             
         }
         
-        
-        refreshJobTable();
-    }
-   public void refreshJobTable(){
     DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         int rowCount = model.getRowCount();
       //  System.out.print(rowCount+"222");
@@ -167,7 +168,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
     model.removeRow(i);
 }
         
-        System.out.print(floralList.getNumberOfEntries());
+        System.out.print(allCustProdList.getNumberOfEntries());
        while(!line.isEmpty()){
            model.addRow(new Object[]{line.dequeue(),"Express"});
            
@@ -260,6 +261,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -581,7 +583,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(140, 140, 140)
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel8Layout.createSequentialGroup()
                     .addGap(50, 50, 50)
@@ -589,12 +591,12 @@ public class CustomizedFloral extends javax.swing.JFrame {
                     .addContainerGap(264, Short.MAX_VALUE)))
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                    .addContainerGap(468, Short.MAX_VALUE)
+                    .addContainerGap(472, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(48, 48, 48)))
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                    .addContainerGap(477, Short.MAX_VALUE)
+                    .addContainerGap(481, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(39, 39, 39)))
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -606,10 +608,10 @@ public class CustomizedFloral extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createSequentialGroup()
                     .addGap(70, 70, 70)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(240, Short.MAX_VALUE)))
+                    .addContainerGap(244, Short.MAX_VALUE)))
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                    .addContainerGap(482, Short.MAX_VALUE)
+                    .addContainerGap(486, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(34, 34, 34)))
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -619,7 +621,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
                     .addContainerGap(104, Short.MAX_VALUE)))
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                    .addContainerGap(492, Short.MAX_VALUE)
+                    .addContainerGap(496, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(24, 24, 24)))
         );
@@ -697,7 +699,15 @@ public class CustomizedFloral extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable3);
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel3.setText("Job Queue List");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -705,13 +715,17 @@ public class CustomizedFloral extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -722,13 +736,13 @@ public class CustomizedFloral extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 182, Short.MAX_VALUE))
+                .addGap(0, 186, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 85, Short.MAX_VALUE))
+                .addGap(0, 68, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Job Queue", jPanel3);
@@ -747,7 +761,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Customize");
@@ -886,7 +900,6 @@ public class CustomizedFloral extends javax.swing.JFrame {
             allSalesOrderList.add(order12);
             CustomizeProduct cf1 = new CustomizeProduct(style.getSelectedItem().toString(),size.getSelectedItem().toString(),priority.getSelectedItem().toString(),order12,GenerateNextCPID(),totalPrice);
             allCustProdList.add(cf1);
-            OrderList o = new OrderList(cf1,order12,GenerateNextOLID(),"1");
             jPanel6.setVisible(false);
             jPanel9.setVisible(true);
             jButton5.setVisible(true);
@@ -903,6 +916,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
                    // fList=fList+"\n-"+flowerList.getEntry(i+1).getFlowerName().toString();
                     //fPrice = fPrice+"\nRM"+flowerList.getEntry(i+1).getPrice();
                     fList+="\n-"+flowerList.getEntry(i+1).getFlowerName().toString()+"\t\tRM"+flowerList.getEntry(i+1).getPrice();
+                    flList+=flowerList.getEntry(i+1).getFlowerName()+"\n";
                 }else{
                     jTextArea7.setText("error");
                 }
@@ -914,7 +928,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
                 String fcustid=acList.getEntry(i+1).getCp().getProdID().toString();
                 if(fcustid.equals(cf.getProdID())){
                     fList=fList+"\n\nAccessories\n-"+acList.getEntry(i+1).getAcName().toString()+"\t\tRM"+acList.getEntry(i+1).getPrice();
-                    
+                    accList+=acList.getEntry(i+1).getAcName()+"\n";
                     
                 }else{
                     
@@ -957,6 +971,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
         flowerListTable.getDataVector().removeAllElements();
         DefaultTableModel acListTable = (DefaultTableModel) jTable2.getModel();
         acListTable.getDataVector().removeAllElements();
+        JOptionPane.showMessageDialog(null,"Item has been added to job queue","Successfully",JOptionPane.INFORMATION_MESSAGE);
+        refreshJobTable();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -968,6 +984,18 @@ public class CustomizedFloral extends javax.swing.JFrame {
          new Homepage(allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        // TODO add your handling code here:
+        int selected=jTable3.getSelectedRow();
+        String id=jTable3.getValueAt(selected, 0).toString();
+        for(int i=0;i<allSalesOrderList.getNumberOfEntries();i++){
+            if(allSalesOrderList.getEntry(i+1).getOrderID().equals(id)){
+                
+                JOptionPane.showMessageDialog(null, "Style : "+style.getSelectedItem()+"\nSize : "+size.getSelectedItem()+"\nFlower : "+flList+"\nAccessories : "+accList+"\nPick-Up Priority : "+priority.getSelectedItem(),"",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jTable3MouseClicked
 
     public String GenerateNextORID(){
         String newID ="";
@@ -1017,7 +1045,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
           
           newID=prefix+String.format("%04d", integer);
         }else{
-            newID="OL0001";
+            newID="CF0001";
         }
           
      return newID;
@@ -1176,6 +1204,134 @@ public class CustomizedFloral extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1196,6 +1352,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

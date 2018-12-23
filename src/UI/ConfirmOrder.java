@@ -196,6 +196,8 @@ public class ConfirmOrder extends javax.swing.JFrame {
         Cancel = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         lblCredit = new javax.swing.JLabel();
+        lblPostal = new javax.swing.JLabel();
+        tfPostal = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,6 +329,8 @@ public class ConfirmOrder extends javax.swing.JFrame {
 
         lblCredit.setText("jLabel12");
 
+        lblPostal.setText("Postal Code");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -349,7 +353,12 @@ public class ConfirmOrder extends javax.swing.JFrame {
                                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblPostal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(tfPostal))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCredit))
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -360,7 +369,7 @@ public class ConfirmOrder extends javax.swing.JFrame {
                                     .addGroup(jPanel10Layout.createSequentialGroup()
                                         .addGap(88, 88, 88)
                                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfCustName, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                            .addComponent(tfCustName)
                                             .addComponent(tfCustPhone)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel6)
@@ -425,7 +434,11 @@ public class ConfirmOrder extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(lblPostal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addGap(6, 6, 6)
@@ -455,9 +468,10 @@ public class ConfirmOrder extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,6 +521,8 @@ public class ConfirmOrder extends javax.swing.JFrame {
                     tfCustName.setText(allConsumerList.getEntry(i+1).getCustName());
                     tfCustPhone.setText(allConsumerList.getEntry(i+1).getCustPhone());
                     taAddress.setText(allConsumerList.getEntry(i+1).getCustAddress());
+                    tfPostal.setText(allConsumerList.getEntry(i+1).getPosCode());
+                    tfPostal.setEditable(false);
                     tfCustName.setEditable(false);
                     tfCustPhone.setEditable(false);
                     taAddress.setEditable(false);
@@ -550,18 +566,66 @@ public class ConfirmOrder extends javax.swing.JFrame {
             orderList.getEntry(i+1).setOrder(order1);
         }
     }
+     public String GenerateNextDLID(){
+        String newID ="";
+         if(!allDeliveryList.isEmpty()){
+          int lastOrderItemIndex = allDeliveryList.getNumberOfEntries();
+          //update the last orderListID
+          String lastOrderListID = allDeliveryList.getEntry(lastOrderItemIndex).getDeliveryID();
+          String prefix =lastOrderListID.substring(0, 1);
+          int integer = Integer.parseInt(lastOrderListID.substring(1,5));
+          integer +=1;
+          
+          newID=prefix+String.format("%04d", integer);
+        }else{
+            newID="D0001";
+        }
+        return newID;
+    }
+     public String GenerateNextPKID(){
+        String newID ="";
+         if(!allPickupList.isEmpty()){
+          int lastOrderItemIndex = allPickupList.getNumberOfEntries();
+          //update the last orderListID
+          String lastOrderListID = allPickupList.getEntry(lastOrderItemIndex).getPickupID();
+          String prefix =lastOrderListID.substring(0, 1);
+          int integer = Integer.parseInt(lastOrderListID.substring(1,5));
+          integer +=1;
+          
+          newID=prefix+String.format("%04d", integer);
+        }else{
+            newID="P0001";
+        }
+        return newID;
+    }
+     public String determineArea(String posCode){
+         String Area="";
+         if (posCode == "53300" || posCode == "53200") {
+              Area ="Setapak";
+            } else if (posCode == "40150" || posCode == "47500") {
+                Area ="Subang";
+            } else if (posCode == "51200" || posCode == "52200") {
+                 Area ="Kepong";
+            } else if (posCode == "47000" || posCode == "48000") {
+                Area ="Rawang";
+                
+            } else {
+                Area="Others";
+            }
+         
+         return Area;
+     }
      public boolean inputValidate() {
       //validate name
       
       String name="";
       boolean validate = false;
-      if(tfCustName.getText().isEmpty()||tfCustPhone.getText().isEmpty()||taAddress.getText().isEmpty()){
+      if(tfCustName.getText().isEmpty()||tfCustPhone.getText().isEmpty()||taAddress.getText().isEmpty()||tfPostal.getText().isEmpty()){
           JOptionPane.showMessageDialog(null,"All input field should not leave blank", "WARNING",JOptionPane.ERROR_MESSAGE);
           
               
           }
       else{
-          
       name = tfCustName.getText();
           
           if( !name.matches("^(([A-Z]|[a-z]|\\s){1,30})*$")){
@@ -573,6 +637,8 @@ public class ConfirmOrder extends javax.swing.JFrame {
                      }else if(taAddress.getText().length()>100){
                       
                           JOptionPane.showMessageDialog(null,"Address should not exceed 100 words", "WARNING",JOptionPane.ERROR_MESSAGE);
+                     }else if(!tfPostal.getText().matches("\\d{5}")){
+                         JOptionPane.showMessageDialog(null,"Postal Code Format Error \nE.g 12345", "WARNING",JOptionPane.ERROR_MESSAGE);
                      }else if(totalAmount!=0.00){
                         
                          if(totalAmount>monthlyCredit){
@@ -605,6 +671,7 @@ return validate;
                    consumer.setCustName(tfCustName.getText());
                    consumer.setCustPhone(tfCustPhone.getText());
                    consumer.setCustAddress(taAddress.getText());
+                   consumer.setPosCode(tfPostal.getText());
                    }
                   
                   
@@ -612,21 +679,23 @@ return validate;
                    order1.setOrderType(DorP.getSelection().getActionCommand());
                    order1.setOrderStatus("confirm");
                    order1.setTotalAmount(totalAmount);
-                   changeAllListToConfirm();
+                   changeAllListToConfirm(); // change all the order item to confirm status
                    
                }else if(watever.getSelection().getActionCommand().toLowerCase().equals("coop")){
                     order1.setCooperate(cooperate);
                    order1.setOrderType(DorP.getSelection().getActionCommand());
                    order1.setOrderStatus("confirm");
                    order1.setTotalAmount(totalAmount);
-                   changeAllListToConfirm();
+                   changeAllListToConfirm(); // change all the order item to confirm status
                   
                }
                if(DorP.getSelection().getActionCommand().equals("delivery")){
-                   deliveryList.add(new Delivery(order1,"D0001","Not assigned yet","","","Setapak",""));
+                   
+                   deliveryList.add(new Delivery(order1,GenerateNextDLID(),"Not assigned yet","","",determineArea(tfPostal.getText()),""));
+                   
                    System.out.println(deliveryList);
                }else if(DorP.getSelection().getActionCommand().toLowerCase().equals("pickup")){
-                   pickupList.add(new Pickup(order1,"P0001","","",DateorPriority.toLowerCase(),"Not yet pickup"));
+                   pickupList.add(new Pickup(order1,GenerateNextPKID(),"","",DateorPriority.toLowerCase(),"Not yet pickup"));
                              
                }
                
@@ -686,6 +755,8 @@ return validate;
                     tfCustName.setText(coopCustList.getEntry(i+1).getCustName());
                     tfCustPhone.setText(coopCustList.getEntry(i+1).getCustPhone());
                     taAddress.setText(coopCustList.getEntry(i+1).getCustAddress());
+                    tfPostal.setText(coopCustList.getEntry(i+1).getPosCode());
+                    tfPostal.setEditable(false);
                     tfCustName.setEditable(false);
                     tfCustPhone.setEditable(false);
                     taAddress.setEditable(false);
@@ -786,6 +857,7 @@ return validate;
     private javax.swing.JLabel lblChooseFromList;
     private javax.swing.JLabel lblCredit;
     private javax.swing.JLabel lblDisplayDate;
+    private javax.swing.JLabel lblPostal;
     private javax.swing.JRadioButton rbConsumer;
     private javax.swing.JRadioButton rbCoop;
     private javax.swing.JRadioButton rbDelivery;
@@ -793,6 +865,7 @@ return validate;
     private javax.swing.JTextArea taAddress;
     private javax.swing.JTextField tfCustName;
     private javax.swing.JTextField tfCustPhone;
+    private javax.swing.JTextField tfPostal;
     private javax.swing.ButtonGroup watever;
     // End of variables declaration//GEN-END:variables
 

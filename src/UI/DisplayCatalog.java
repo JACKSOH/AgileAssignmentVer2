@@ -620,7 +620,8 @@ public void initialize(){
                totalAmt+=orderList.getEntry(i+1).getCatalogProduct().getProdPrice()*(Integer.parseInt(orderList.getEntry(i+1).getQuantity()));
            }
        }
-    }    public String GenerateNextORID(){
+    }    
+    public String GenerateNextORID(){
         String newID ="";
          if(!salesOrderList.isEmpty()){
           int lastOrderItemIndex = salesOrderList.getNumberOfEntries();
