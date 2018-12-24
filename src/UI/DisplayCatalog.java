@@ -552,13 +552,14 @@ public void initialize(){
     }// </editor-fold>//GEN-END:initComponents
 
     public void refreshSalesOrderTable(){
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int rowCount = model.getRowCount();
-  
+  //remove all the row
         for (int i = rowCount - 1; i >= 0; i--) {
     model.removeRow(i);
 }
-        
+        // loop all the sales order lis and comepare whether the order status is confirm
          for(int i=0;i<salesOrderList.getNumberOfEntries();i++){
                if(salesOrderList.getEntry(i+1).getOrderStatus().toLowerCase().equals("confirm")){
                     if(salesOrderList.getEntry(i+1).getConsumer()!=null){
