@@ -78,7 +78,7 @@ public class DisplayCatalog extends javax.swing.JFrame {
              this.allOrderList=allOrderList;
              this.allPickupList=allPickupList;
              this.allSalesOrderList=allSalesOrderList;
-         System.out.print(allSalesOrderList.getNumberOfEntries());
+         
         for(int i =0;i<confirmOrderList.getNumberOfEntries();i++){
 
             orderList.add(confirmOrderList.getEntry(i+1));
@@ -99,7 +99,7 @@ public void initialize(){
    orderList=allOrderList;
    
    jLabel3.setVisible(false);
-   
+    GenerateNextORID();
           order.setOrderID(GenerateNextORID());//everytime the class is called add new one.
           order.setOrderStatus("processing");
               //clear all the order item
@@ -598,9 +598,11 @@ public void initialize(){
           integer +=1;
           
           newID=prefix+String.format("%04d", integer);
+          
         }else{
             newID="OR0001";
         }
+         
         return newID;
     }
     public String GenerateNextOLID(){
@@ -626,7 +628,7 @@ public void initialize(){
         
         if(jTable2.getRowCount()!=0){
            new ConfirmOrder(order,orderList,prodList,allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
-     
+           this.setVisible(false);
      }else{
          JOptionPane.showMessageDialog(null, "Please choose at least one item or product! ","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
      }
@@ -661,7 +663,7 @@ public void initialize(){
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
       int rowSelected = jTable1.getSelectedRow();
       Order order = new Order();//to get selected order order
-     
+     selectOrderList.clear();
       for(int i=0;i<orderList.getNumberOfEntries();i++){
           
          if(orderList.getEntry(i+1).getOrder().getOrderID().equals(jTable1.getModel().getValueAt(rowSelected, 0))) {
@@ -735,8 +737,7 @@ public void initialize(){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // check whether item is slected
-        //System.out.print(FlowerStyleddl.getItemCount()<3);
-        System.out.print(allSalesOrderList.getNumberOfEntries());
+       
         CatalogProduct selectedProd = new CatalogProduct();
         if(Flowerddl.getSelectedIndex()==0){
             JOptionPane.showMessageDialog(null,"Please select product type!","Warning", JOptionPane.WARNING_MESSAGE);
@@ -763,7 +764,7 @@ public void initialize(){
                     order.setOrderStatus("processing");
                    // salesOrderList.add(order);
                 }
-                System.out.print(allSalesOrderList.getNumberOfEntries());
+               
                 orderList.add(new OrderList(selectedProd,order,GenerateNextOLID(),tfQuantity.getText()));
                 refreshOrderTable();
                 JOptionPane.showMessageDialog(null,"Item is successfully addedd to cart","Confirmation message", JOptionPane.INFORMATION_MESSAGE);

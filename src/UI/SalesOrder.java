@@ -29,6 +29,7 @@ static Order order;
     }
     public SalesOrder(Order order,ListInterface<OrderList> orderList){
         this.order=order;
+        
         this.orderList=orderList;
         
         initComponents();
@@ -235,7 +236,7 @@ static Order order;
       
         String string =""; // string for generate sales detailss
         double totalAmt=0.00;
-        System.out.print("hi"+orderList.getNumberOfEntries());
+        // to print out the sales order report
         if(orderList.getEntry(1).getCustomizeProduct()!=null){
             string +="Order List ID:\t"+orderList.getEntry(1).getOLID()
                 +"\nProduct ID\t Size\t Style\t\t Unit Price\t\t Order Quatity\n"+orderList.getEntry(1).getCustomizeProduct().getProdID()

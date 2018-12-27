@@ -563,6 +563,9 @@ public class ConfirmOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_rbPickupActionPerformed
     public void changeAllListToConfirm(){
         for(int i=0;i<orderList.getNumberOfEntries();i++){
+            System.out.print(orderList.getEntry(i+1).getOrder().getOrderID()+"oh yeah");
+            System.out.println(orderList.getEntry(i+1).getOrder().getOrderID().equals(order1.getOrderID())+"yeayea");
+            if(orderList.getEntry(i+1).getOrder().getOrderID().equals(order1.getOrderID()))
             orderList.getEntry(i+1).setOrder(order1);
         }
     }
@@ -684,6 +687,7 @@ return validate;
                    order1.setOrderType(DorP.getSelection().getActionCommand());
                    order1.setOrderStatus("confirm");
                    order1.setTotalAmount(totalAmount);
+                   
                    changeAllListToConfirm(); // change all the order item to confirm status
                    
                }else if(watever.getSelection().getActionCommand().toLowerCase().equals("coop")){
@@ -705,14 +709,14 @@ return validate;
                }
                
                allSalesOrderList.add(order1);
-               
+               allOrderList=orderList;
                JOptionPane.showMessageDialog(null, "Order is sucessfully addedd");
                
               
                //pass back param
                new DisplayCatalog(order1,orderList,allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
-               
-           this.setVisible(false);
+              
+                 this.setVisible(false);
            
            }
        }
@@ -726,6 +730,8 @@ return validate;
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
     System.out.print("cancel1");
+         new DisplayCatalog(order1,orderList,allCatProdList,allCustProdList,allSalesOrderList,allOrderList,allConsumerList,allCoopList,allDeliveryList,allPickupList,allInvoiceList).setVisible(true);
+              
         this.setVisible(false);
     }//GEN-LAST:event_CancelActionPerformed
 

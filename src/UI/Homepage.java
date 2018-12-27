@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Homepage extends javax.swing.JFrame {
 
-   
+   // initialize all the all the parameter use by this application
        static ListInterface<CatalogProduct> allCatProdList = new LList<>();
     static ListInterface<CustomizeProduct> allCustProdList = new LList<>();
     static ListInterface<Order> allSalesOrderList = new LList<>();
@@ -62,7 +62,7 @@ public class Homepage extends javax.swing.JFrame {
          }
     public void initialize(){
              //init catalog product list
-         
+         // insert sample of flower data
         
         allCatProdList.add(new CatalogProduct("Just For You","Fresh Flower","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",11,"CP001",120.00));
      allCatProdList.add(new CatalogProduct("True Romance","Floral arrangement","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",12,"CP002",120.00));
@@ -77,21 +77,16 @@ public class Homepage extends javax.swing.JFrame {
               allCatProdList.add(new CatalogProduct("Sweet Admiration","Floral arrangement","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",15,"CP011",100.00));
               allCatProdList.add(new CatalogProduct("Ribbon","Accessories","Available","Including lavish wrapping with luxurious paper, \n guaranteed to make the recipient smile.",20,"CP012",100.00));
         
-        //initialize invoice list
-        
-        //initialize delivery list
-        
-        //initiazize pickup list
-        
+       
         //initialize cooperate list
         allCoopList.add(new CooperateE(1000.00,0,"CP1000","Meow Sdn Bd","017-9996666","53300","Jalan Tak tau"));
         allCoopList.add(new CooperateE(2000.00,1,"CP1001","Wang Sdn Bd","017-3366666","53400","Jalan Tak tau2"));
         allCoopList.add(new CooperateE(1500.00,2,"CP1002","Oh yeah Sdn Bd","017-5554444","53500","Jalan Tak tau3"));
         
         //add consumer dummy data
-        allConsumerList.add(new ConsumerE("M", "CO1000", "Ah Seng", "017-55667777","53300","Jalan Mao"));
-       allConsumerList.add(new ConsumerE("M", "CO1001", "Ah Beng", "017-33666666","53200","Jalan Hiao"));
-        allConsumerList.add(new ConsumerE("M", "CO1002", "Ah Heng", "017-45454455","53200","Jalan Wu"));
+        allConsumerList.add(new ConsumerE("Male", "CO1000", "Ah Seng", "017-55667777","53300","Jalan Mao"));
+       allConsumerList.add(new ConsumerE("Male", "CO1001", "Ah Beng", "017-33666666","53200","Jalan Hiao"));
+        allConsumerList.add(new ConsumerE("Female", "CO1002", "Ah Heng", "017-45454455","53200","Jalan Wu"));
          }
     
     @SuppressWarnings("unchecked")
