@@ -9,6 +9,7 @@ import ADT.LList;
 import ADT.ListInterface;
 import Entity.*;
 import UI.CustomizedFloral;
+import static UI.Product.allCatProdList;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -60,26 +61,9 @@ public class PromotionDetail extends javax.swing.JFrame {
     }
    
     public void initialize(){
-        CatalogProduct cp = new CatalogProduct("Lily","Bouquet","Available","Funny",120,"CP001",120.00);
-        CatalogProduct cp1 = new CatalogProduct("Rose","Floral arrangement","Remaining Stock Rarely","Funny",30,"CP002",120.00);
-        CatalogProduct cp2 = new CatalogProduct("Carnation","Bouquet","Out-of-Stock","Funny",1,"CP003",120.00);
-        CatalogProduct cp3 = new CatalogProduct("Tuplis","Fresh Flower","Available","Funny",120,"CP004",120.00); 
-        productList.add(cp);
-        productList.add(cp1);
-        productList.add(cp2);
-        productList.add(cp3); 
+    productList=allCatProdList;
         refreshFlowerDDL();
-        refreshsFlowerDDL();
-        Promotion p = new Promotion("PR001","2018-09-01","2018-10-1","Summer Sales",10);
-        promotionList.add(p);  
-       
-        PromotionList Pl = new PromotionList(cp,p,"PL001");
-        PromotionList P2 = new PromotionList(cp1,p,"PL001");
-        PromotionList P3 = new PromotionList(cp2,p,"PL001");
-        promoList.add(Pl);
-        promoList.add(P2);
-        promoList.add(P3);
-        
+        refreshsFlowerDDL();   
         DefaultTableModel model = (DefaultTableModel) Product.getModel();
         for(int i=0; i<productList.getNumberOfEntries(); i++){
             model.addRow(new Object[]{productList.getEntry(i+1).getProdID(),

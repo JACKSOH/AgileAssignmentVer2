@@ -29,7 +29,7 @@ public class UpdateMonthlyCredit extends javax.swing.JFrame {
     static ListInterface<Pickup> allPickupList = new LList<>();
     static ListInterface<Invoice> allInvoiceList = new LList<>();
     
-    ListInterface<CooperateE> cooList = new LList<>();
+   // ListInterface<CooperateE> cooList = new LList<>();
    
     /**
      * Creates new form AssignMonthlyCredit
@@ -37,11 +37,9 @@ public class UpdateMonthlyCredit extends javax.swing.JFrame {
     public UpdateMonthlyCredit() {
         initComponents();
        
-        cooList.add(new CooperateE(1000,"CP1000","SBS Company.BHD","011-11194912","45300","test address 1"));
-        cooList.add(new CooperateE(888,"CP1001","KL Company.BHD","012-3456789","55300","test address 2"));
-        cooList.add(new CooperateE(999,"CP1002","Test Company.BHD","012-4567893","97782","test address 3"));
-        for(int i=0;i<cooList.getNumberOfEntries();i++){
-            ListCoNa.addItem(cooList.getEntry(i+1).getCustName());
+        
+        for(int i=0;i<allCoopList.getNumberOfEntries();i++){
+            ListCoNa.addItem(allCoopList.getEntry(i+1).getCustName());
         }
     }
     public UpdateMonthlyCredit(ListInterface<CatalogProduct> allCatProdList ,ListInterface<CustomizeProduct> allCustProdList ,ListInterface<Order> allSalesOrderList ,
@@ -58,8 +56,8 @@ public class UpdateMonthlyCredit extends javax.swing.JFrame {
              this.allSalesOrderList=allSalesOrderList;
              
              initComponents();
-             for(int i=0;i<cooList.getNumberOfEntries();i++){
-            ListCoNa.addItem(cooList.getEntry(i+1).getCustName());
+             for(int i=0;i<allCoopList.getNumberOfEntries();i++){
+            ListCoNa.addItem(allCoopList.getEntry(i+1).getCustName());
         }
     }
 
@@ -299,14 +297,14 @@ public class UpdateMonthlyCredit extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        for(int i=0;i<cooList.getNumberOfEntries();i++){
-            if(ListCoNa.getSelectedItem()==cooList.getEntry(i+1).getCustName()){
-              String a= String.valueOf(cooList.getEntry(i+1).getCustLimit());
-               cooID.setText(cooList.getEntry(i+1).getCustID());
+        for(int i=0;i<allCoopList.getNumberOfEntries();i++){
+            if(ListCoNa.getSelectedItem()==allCoopList.getEntry(i+1).getCustName()){
+              String a= String.valueOf(allCoopList.getEntry(i+1).getCustLimit());
+               cooID.setText(allCoopList.getEntry(i+1).getCustID());
                Credit.setText(a);
-               PostCode.setText(cooList.getEntry(i+1).getPosCode());
-               cooContact.setText(cooList.getEntry(i+1).getCustPhone());
-               cooAddress.setText(cooList.getEntry(i+1).getCustAddress());
+               PostCode.setText(allCoopList.getEntry(i+1).getPosCode());
+               cooContact.setText(allCoopList.getEntry(i+1).getCustPhone());
+               cooAddress.setText(allCoopList.getEntry(i+1).getCustAddress());
                 
             }
         
@@ -326,17 +324,17 @@ public class UpdateMonthlyCredit extends javax.swing.JFrame {
         }
         else
 
-         for(int i=0;i<cooList.getNumberOfEntries();i++){
-            if(ListCoNa.getSelectedItem()==cooList.getEntry(i+1).getCustName()){
-               cooList.replace(i+1,new CooperateE(credit,cooList.getEntry(i+1).getCustID(),
-                                                cooList.getEntry(i+1).getCustName(),
-                                                cooList.getEntry(i+1).getCustPhone(),
-                                                 cooList.getEntry(i+1).getPosCode()
-                                                ,cooList.getEntry(i+1).getCustAddress()));
+         for(int i=0;i<allCoopList.getNumberOfEntries();i++){
+            if(ListCoNa.getSelectedItem()==allCoopList.getEntry(i+1).getCustName()){
+               allCoopList.replace(i+1,new CooperateE(credit,allCoopList.getEntry(i+1).getCustID(),
+                                                allCoopList.getEntry(i+1).getCustName(),
+                                                allCoopList.getEntry(i+1).getCustPhone(),
+                                                 allCoopList.getEntry(i+1).getPosCode()
+                                                ,allCoopList.getEntry(i+1).getCustAddress()));
                JOptionPane.showMessageDialog(null,"Successful Update","Update",JOptionPane.INFORMATION_MESSAGE);
                
             }
-            System.out.println(cooList.getEntry(i+1));
+            System.out.println(allCoopList.getEntry(i+1));
          }
     }//GEN-LAST:event_jButton2ActionPerformed
 
